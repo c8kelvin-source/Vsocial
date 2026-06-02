@@ -1058,10 +1058,8 @@ ALTER TABLE `messages`
 --
 -- Indexes for table `notifications`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_account_status` (`account_status`),
-  ADD KEY `idx_user_role` (`role`);
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notify_id`);
 
 --
 -- Indexes for table `friend_requests`
@@ -1113,7 +1111,9 @@ ALTER TABLE `tags`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_account_status` (`account_status`),
+  ADD KEY `idx_user_role` (`role`);
 
 --
 -- AUTO_INCREMENT for dumped tables

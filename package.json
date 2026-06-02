@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon app.js",
     "start:guard": "node scripts/server-guard.js",
-    "dev": "webpack -d --watch",
-    "prod": "webpack -p --watch",
+    "dev": "npm run env && webpack -d --watch",
+    "prod": "npm run env && webpack -p --watch",
     "env": "handy-client-env",
     "test": "jest",
     "test:watch": "jest --watchAll",
