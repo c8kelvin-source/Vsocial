@@ -1,5 +1,4 @@
-# 🌐 Vsocial — Mạng Xã Hội Clone Instagram
-
+# 🌐 Vsocial — Mạng Xã Hội
 > Ứng dụng mạng xã hội full-stack được xây dựng với **Node.js**, **Express**, **React**, **Redux** và **MySQL**.  
 > Tính năng: đăng bài, bình luận, theo dõi, nhắn tin real-time (Socket.io), thông báo, quản trị viên, v.v.
 
