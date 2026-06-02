@@ -2,24 +2,57 @@
 
 <div class="notes_wrapper">
 
-  <div class="log_sign">
-    <a href="/signup" class="pri_btn">Need an account?</a>
-  </div>
-
-  <div class="register cua">
-    <div class="display_text">
-      <span>Get started again</span>
+  <div class="auth_card">
+    <div class="auth_card_left">
+      <div class="brand_details">
+        <img src="/images/favicon/old/instagram.png" alt="Vsocial Logo" class="auth_logo">
+        <h1 class="auth_title">Vsocial</h1>
+        <p class="auth_subtitle">Capture, connect, and share your moments with the world in a modern, reactive environment.</p>
+      </div>
+      <div class="auth_features">
+        <div class="feature_item">
+          <i class="fas fa-camera-retro"></i>
+          <span>Share posts & photos</span>
+        </div>
+        <div class="feature_item">
+          <i class="fas fa-comments"></i>
+          <span>Real-time direct messaging</span>
+        </div>
+        <div class="feature_item">
+          <i class="fas fa-users"></i>
+          <span>Create & join communities</span>
+        </div>
+      </div>
     </div>
-    <form class="form_login">
-      <input type="text" name="username" value="" class="l_username" autofocus required spellcheck="false" autocomplete='false' placeholder='Username'>
-      <input type="password" name="password" value="" class="l_password" id='l_password' required placeholder='Password'>
-      <span class="show_psswrd s_p_l">
-        <i class="fas fa-lock"></i>
-      </span>
-      <input type="submit" name="" value="Login To Continue" class="l_submit">
-    </form>
-    <div class="forgot_psswrd">
-      <a href="forgot-password" class="a_pri" alt="Forgot your password">Forgot your password?</a>
+
+    <div class="auth_card_right">
+      <div class="auth_form_header">
+        <h2>Welcome Back</h2>
+        <p>Login to access your feed</p>
+      </div>
+
+      <form class="form_login">
+        <div class="input_group">
+          <input type="text" name="username" value="" class="l_username" autofocus required spellcheck="false" autocomplete="off" placeholder="Username">
+        </div>
+        <div class="input_group password_group">
+          <input type="password" name="password" value="" class="l_password" id="l_password" required placeholder="Password">
+          <span class="show_psswrd s_p_l">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+        <input type="submit" name="" value="Login To Continue" class="l_submit">
+      </form>
+
+      <div class="auth_footer_links">
+        <div class="forgot_psswrd">
+          <a href="forgot-password" class="a_pri" alt="Forgot your password">Forgot password?</a>
+        </div>
+        <div class="toggle_auth">
+          <span>Need an account?</span>
+          <a href="/signup" class="auth_link">Sign up</a>
+        </div>
+      </div>
     </div>
   </div>
 

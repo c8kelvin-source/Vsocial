@@ -2,38 +2,87 @@
 
 <div class="notes_wrapper">
 
-  <div class="log_sign">
-    <a href="/login" class="pri_btn">Already have an account?</a>
-  </div>
-
-  <div class="register cua ">
-    <div class="display_text">
-      <span>Get started now and let the fun begins</span>
+  <div class="auth_card">
+    <div class="auth_card_left">
+      <div class="brand_details">
+        <img src="/images/favicon/old/instagram.png" alt="Vsocial Logo" class="auth_logo">
+        <h1 class="auth_title">Vsocial</h1>
+        <p class="auth_subtitle">Capture, connect, and share your moments with the world in a modern, reactive environment.</p>
+      </div>
+      <div class="auth_features">
+        <div class="feature_item">
+          <i class="fas fa-camera-retro"></i>
+          <span>Share posts & photos</span>
+        </div>
+        <div class="feature_item">
+          <i class="fas fa-comments"></i>
+          <span>Real-time direct messaging</span>
+        </div>
+        <div class="feature_item">
+          <i class="fas fa-users"></i>
+          <span>Create & join communities</span>
+        </div>
+      </div>
     </div>
-    <form class="form_register">
-      <input type="text" name="username" value="" class="s_username filter_illegal" autofocus spellcheck="false" autocomplete='false' placeholder='Username' required>
-      <div class="username_checker">
-        <span class="checker_text">username not available</span>
-        <span class="checker_icon">
-          <i class="far fa-frown"></i>
-        </span>
+
+    <div class="auth_card_right">
+      <div class="auth_form_header">
+        <h2>Get Started Now</h2>
+        <p>Create an account to join the fun</p>
       </div>
-      <input type="text" name="first_name" value="" autocomplete="off" placeholder="First name" class="s_firstname small_input filter_illegal" spellcheck="false" maxlength="20" required>
-      <input type="text" name="surname" value="" autocomplete="off" placeholder="Surname" class="s_surname small_input filter_illegal" spellcheck="false" maxlength="20" required>
-      <input type="email" name="email" value="" class="s_email" spellcheck="false" autocomplete='false' placeholder='Email' required>
-      <input type="password" name="password" value="" id='s_password' class="s_password" placeholder='Password' required>
-      <span class="show_psswrd s_p_s">
-        <i class="fas fa-lock"></i>
-      </span>
-      <input type="password" name="admin_password" value="" id='s_admin_password' class="s_admin_password" placeholder='Admin Password (optional)'>
-      <div class="terms_div">
-        <input type="checkbox" id="s_terms" name="s_terms" class="s_terms" required>
-        <label for="s_terms" class="terms">I agree to
-          <a href="/terms" class="a_pri">Vsocial Terms</a>
-        </label>
+
+      <form class="form_register">
+        <div class="input_group">
+          <input type="text" name="username" value="" class="s_username filter_illegal" autofocus spellcheck="false" autocomplete="off" placeholder="Username" required>
+          <div class="username_checker">
+            <span class="checker_text">username not available</span>
+            <span class="checker_icon">
+              <i class="far fa-frown"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="name_row">
+          <div class="input_group half_width">
+            <input type="text" name="first_name" value="" autocomplete="off" placeholder="First name" class="s_firstname small_input filter_illegal" spellcheck="false" maxlength="20" required>
+          </div>
+          <div class="input_group half_width">
+            <input type="text" name="surname" value="" autocomplete="off" placeholder="Surname" class="s_surname small_input filter_illegal" spellcheck="false" maxlength="20" required>
+          </div>
+        </div>
+
+        <div class="input_group">
+          <input type="email" name="email" value="" class="s_email" spellcheck="false" autocomplete="off" placeholder="Email" required>
+        </div>
+
+        <div class="input_group password_group">
+          <input type="password" name="password" value="" id="s_password" class="s_password" placeholder="Password" required>
+          <span class="show_psswrd s_p_s">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+
+        <div class="input_group">
+          <input type="password" name="admin_password" value="" id="s_admin_password" class="s_admin_password" placeholder="Admin Password (optional)">
+        </div>
+
+        <div class="terms_div">
+          <input type="checkbox" id="s_terms" name="s_terms" class="s_terms" required>
+          <label for="s_terms" class="terms">I agree to
+            <a href="/terms" class="a_pri">Vsocial Terms</a>
+          </label>
+        </div>
+
+        <input type="submit" name="" value="Signup For Free" class="s_submit">
+      </form>
+
+      <div class="auth_footer_links">
+        <div class="toggle_auth">
+          <span>Already have an account?</span>
+          <a href="/login" class="auth_link">Log in</a>
+        </div>
       </div>
-      <input type="submit" name="" value="Signup For Free" class="s_submit">
-    </form>
+    </div>
   </div>
 
 </div>

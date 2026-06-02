@@ -401,3 +401,804 @@
   }
 
 }
+
+/* ==========================================================================
+   INTERACTIVE 2-COLUMN AUTH CARD (LOGIN & SIGNUP OVERHAUL)
+   ========================================================================== */
+
+.auth_card {
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
+  overflow: hidden;
+  background: $ff;
+  border: 1px solid $ee;
+  box-shadow: 0 12px 40px $light_shadow;
+  max-width: 900px;
+  width: 90%;
+  margin: 80px auto;
+  min-height: 520px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: cardFadeIn 0.5s ease-out;
+
+  .auth_card_left {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(darken($pric, 35%), 0.3) 0%, rgba(#121212, 0.75) 100%), url('/images/login_bg_laptop.png') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+      top: -25%;
+      left: -25%;
+      pointer-events: none;
+    }
+
+    .brand_details {
+      margin-bottom: 40px;
+      text-align: left;
+
+      .auth_logo {
+        width: 48px;
+        height: auto;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      }
+
+      .auth_title {
+        font-family: 'Satisfy', cursive;
+        font-size: 36px;
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+
+      .auth_subtitle {
+        font-size: 15px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.85);
+        font-family: $family;
+      }
+    }
+
+    .auth_features {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .feature_item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease, background 0.3s ease;
+
+        &:hover {
+          transform: translateX(5px);
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        i {
+          font-size: 18px;
+          color: #ffffff;
+          width: 24px;
+          text-align: center;
+        }
+
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .auth_card_right {
+    flex: 1.2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: $ff;
+
+    .auth_form_header {
+      margin-bottom: 30px;
+
+      h2 {
+        font-size: 24px;
+        color: $oo;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 14px;
+        color: $d_light;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .input_group {
+        position: relative;
+        width: 100%;
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+          width: 100%;
+          padding: 12px 14px;
+          box-sizing: border-box;
+          background: darken($ff, 4%);
+          border: 1px solid $ee;
+          border-radius: 8px;
+          color: $dark;
+          font-size: 14px;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+          &:focus {
+            outline: none;
+            border-color: $pric;
+            box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.15);
+            background: darken($ff, 2%);
+          }
+        }
+
+        .show_psswrd {
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+          color: $d_light;
+          font-size: 15px;
+          transition: color 0.3s ease;
+          display: flex;
+          align-items: center;
+
+          &:hover {
+            color: $pric;
+          }
+        }
+      }
+
+      .name_row {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+
+        .half_width {
+          flex: 1;
+        }
+      }
+
+      .username_checker {
+        position: absolute;
+        bottom: -32px;
+        left: 0;
+        right: auto;
+        top: auto;
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid $ee;
+        background: darken($ff, 5%);
+        width: max-content;
+        z-index: 2;
+        font-size: 11px;
+        display: none;
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: darken($ff, 5%);
+          transform: rotate(45deg);
+          left: 12px;
+          top: -5px;
+          border-left: 1px solid $ee;
+          border-top: 1px solid $ee;
+        }
+
+        .checker_text {
+          color: #ff6b6b;
+        }
+
+        .checker_icon {
+          color: #ff6b6b;
+          margin-left: 4px;
+          i {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .terms_div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 5px;
+
+        input[type="checkbox"] {
+          accent-color: $pric;
+          cursor: pointer;
+          width: 16px;
+          height: 16px;
+        }
+
+        label {
+          font-size: 13px;
+          color: $d_light;
+          cursor: pointer;
+
+          a {
+            color: $pric;
+            font-weight: 600;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      input[type="submit"] {
+        background: $pric;
+        color: darken($ff, 10%);
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        margin-top: 10px;
+
+        &:hover {
+          background: lighten($pric, 5%);
+          box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: translateY(1px);
+        }
+      }
+    }
+
+    .auth_footer_links {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+
+      .forgot_psswrd a {
+        color: $d_light;
+        transition: color 0.3s ease;
+        &:hover {
+          color: $pric;
+        }
+      }
+
+      .toggle_auth {
+        color: $d_light;
+        display: flex;
+        gap: 5px;
+
+        .auth_link {
+          color: $pric;
+          font-weight: 600;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Responsive styles for Auth Card */
+@media (max-width: 768px) {
+  .auth_card {
+    flex-direction: column;
+    min-height: auto;
+    max-width: 450px;
+    width: 92%;
+    top: 55%;
+    position: relative;
+    transform: translateX(-50%);
+    margin: 40px auto;
+
+    .auth_card_left {
+      display: none; /* Hide branding sidebar on mobile screens for simplicity */
+    }
+
+    .auth_card_right {
+      padding: 30px 24px;
+    }
+  }
+}
+
+/* ==========================================================================
+   WELCOME PAGE (HERO, FEATURE GRID & CTA)
+   ========================================================================== */
+
+.welcome_wrapper {
+  max-width: 1100px;
+  width: 90%;
+  margin: 80px auto 40px;
+  color: $dark;
+  font-family: $family;
+  min-height: calc(100vh - 120px);
+
+  .welcome_hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 80px;
+    padding-top: 40px;
+
+    .hero_content {
+      flex: 1.2;
+      text-align: left;
+
+      .hero_title {
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        color: #ffffff;
+
+        .brand_gradient {
+          background: linear-gradient(120deg, $pric 0%, lighten($pric, 15%) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+
+      .hero_lead {
+        font-size: 16px;
+        line-height: 1.7;
+        color: $d_light;
+        margin-bottom: 30px;
+      }
+
+      .hero_actions {
+        display: flex;
+        gap: 15px;
+
+        .hero_btn {
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+        }
+
+        .btn_primary {
+          background: $pric;
+          color: darken($ff, 10%);
+          border: 1px solid $pric;
+          &:hover {
+            background: lighten($pric, 5%);
+            box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+            transform: translateY(-2px);
+            opacity: 1;
+          }
+        }
+
+        .btn_secondary {
+          background: transparent;
+          color: #ffffff;
+          border: 1px solid $ee;
+          &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: $d_light;
+            transform: translateY(-2px);
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .hero_image_wrapper {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .hero_img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        animation: floatAnimation 4s ease-in-out infinite;
+        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+      }
+    }
+  }
+
+  .welcome_features {
+    margin-bottom: 80px;
+    text-align: center;
+
+    .section_title {
+      font-size: 28px;
+      font-weight: 700;
+      color: $oo;
+      margin-bottom: 40px;
+    }
+
+    .features_grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+
+      .feature_card {
+        background: $ff;
+        border: 1px solid $ee;
+        border-radius: 12px;
+        padding: 30px 20px;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+
+        &:hover {
+          transform: translateY(-8px);
+          border-color: $pric;
+          box-shadow: 0 8px 25px rgba(187, 134, 252, 0.15);
+        }
+
+        .card_icon {
+          font-size: 28px;
+          color: $pric;
+          margin-bottom: 20px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        h3 {
+          font-size: 18px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-bottom: 12px;
+        }
+
+        p {
+          font-size: 13.5px;
+          color: $d_light;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+
+  .welcome_cta {
+    .cta_card {
+      background: linear-gradient(135deg, darken($pric, 25%) 0%, darken($pric, 45%) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 50px 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+      h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 12px;
+      }
+
+      p {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta_btn {
+        display: inline-block;
+        padding: 14px 32px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        background: #ffffff;
+        color: darken($pric, 30%);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.9);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome_wrapper {
+    margin-top: 40px;
+
+    .welcome_hero {
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 50px;
+
+      .hero_content {
+        text-align: center;
+
+        .hero_title {
+          font-size: 32px;
+        }
+
+        .hero_actions {
+          justify-content: center;
+        }
+      }
+
+      .hero_image_wrapper {
+        display: none; /* Hide illustrative big image on mobile for layout friendliness */
+      }
+    }
+
+    .welcome_features .section_title {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .welcome_cta .cta_card {
+      padding: 35px 20px;
+      h2 {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   ABOUT PAGE (PILLAR CARDS)
+   ========================================================================== */
+
+.about_container {
+  max-width: 900px;
+  width: 90%;
+  margin: 100px auto 40px;
+  font-family: $family;
+  text-align: center;
+  color: $dark;
+
+  .about_header {
+    margin-bottom: 50px;
+
+    h1 {
+      font-size: 36px;
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .about_lead {
+      font-size: 16px;
+      color: $d_light;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .pillars_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+
+    .pillar_card {
+      background: $ff;
+      border: 1px solid $ee;
+      border-radius: 12px;
+      padding: 35px 25px;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-6px);
+        border-color: $pric;
+        box-shadow: 0 8px 25px rgba(187, 134, 252, 0.12);
+      }
+
+      .pillar_icon {
+        font-size: 32px;
+        color: $pric;
+        margin-bottom: 20px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h3 {
+        font-size: 19px;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 12px;
+      }
+
+      p {
+        font-size: 13.5px;
+        color: $d_light;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   DEVELOPER PAGE (PROFILE CARDS)
+   ========================================================================== */
+
+.dev_container {
+  max-width: 900px;
+  width: 90%;
+  margin: 100px auto 40px;
+  font-family: $family;
+  text-align: center;
+  color: $dark;
+
+  .dev_header {
+    margin-bottom: 50px;
+
+    h1 {
+      font-size: 36px;
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .dev_lead {
+      font-size: 16px;
+      color: $d_light;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .dev_profiles {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    .profile_card {
+      background: $ff;
+      border: 1px solid $ee;
+      border-radius: 12px;
+      padding: 35px 25px;
+      width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-6px);
+        border-color: $pric;
+        box-shadow: 0 8px 25px rgba(187, 134, 252, 0.12);
+      }
+
+      .profile_avatar_wrapper {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, $pric 0%, darken($pric, 20%) 100%);
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+
+        .profile_avatar_fallback {
+          font-size: 28px;
+          color: #ffffff;
+        }
+      }
+
+      .profile_name {
+        font-size: 19px;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 4px;
+      }
+
+      .profile_role {
+        font-size: 13px;
+        color: $pric;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 15px;
+      }
+
+      .profile_bio {
+        font-size: 13.5px;
+        color: $d_light;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        min-height: 70px;
+      }
+
+      .profile_links {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+
+        .profile_link {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          background: darken($ff, 4%);
+          border: 1px solid $ee;
+          border-radius: 6px;
+          font-size: 12px;
+          color: $d_light;
+          font-weight: 600;
+          transition: all 0.3s ease;
+
+          &:hover {
+            color: #ffffff;
+            border-color: $pric;
+            background: rgba(187, 134, 252, 0.05);
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
