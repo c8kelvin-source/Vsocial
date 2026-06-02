@@ -1,0 +1,141 @@
+// variables
+@import 'variables/variables';
+
+// mixins
+@import 'mixins/mixins';
+
+// defaults
+@import 'defaults/defaults';
+
+// components
+@import 'components/components';
+
+// post
+@import 'post/post-styles';
+
+// pages
+@import 'pages/pages';
+
+// preload [APP LOADING]
+.preload{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(120deg, rgb(161, 240, 255), rgb(255, 253, 208));
+  z-index: 3;
+  text-align: center;
+
+  & .preload_spinner {
+    position: absolute;
+    top: 50%;
+    left: 37%;
+    transform: translate(-50%, -50%);
+
+    & span {
+      background: #da85af !important;
+    }
+
+  }
+
+}
+
+// TOP WRAPPER
+.badshah{
+  position: relative;
+  top: 82px;
+  left: 294px;
+  width: calc(100vw - 334px);
+  min-width: 600px;
+  display: flow-root;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.senapati{
+  width: 100%;
+  display: block;
+  position: relative;
+  padding-right: 320px; /* Space for the absolute sidebar so margin auto centers correctly */
+  box-sizing: border-box;
+}
+
+.prajkumar{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 540px;
+}
+
+.srajkumar{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 300px;
+  border-radius: 4px;
+}
+
+// RESPONSIVE DESIGN
+@media (max-width: 1024px) {
+  .srajkumar {
+    display: none;
+  }
+  
+  .badshah {
+    width: calc(100vw - 294px);
+    min-width: auto;
+    padding-right: 20px;
+  }
+  
+  .senapati {
+    padding-right: 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .m_n_wrapper {
+    width: 64px;
+    left: 10px;
+  }
+  
+  .m_n_wrapper > .m_n > ul > li > a > span.m_n_text,
+  .m_n_wrapper > .m_n > ul > li > a > span.m_n_new,
+  .m_n_wrapper > .m_n_bottom {
+    display: none !important;
+  }
+  
+  .m_n_wrapper > .m_n > ul > li > a > span.m_n_icon {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .m_n_wrapper > .m_n img {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+  
+  .badshah {
+    left: 84px;
+    width: calc(100vw - 84px);
+    padding-right: 10px;
+  }
+
+  .header {
+    width: calc(100vw - 84px) !important;
+    left: 84px !important;
+  }
+  
+  .prajkumar {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .badshah {
+    top: 60px;
+  }
+}

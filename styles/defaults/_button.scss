@@ -1,0 +1,94 @@
+.a_disabled {
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+}
+
+.sec_btn_disabled {
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+}
+
+%btn-base {
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  outline: none;
+  border: none;
+  padding: 8px 16px;
+  transition: all $transition-speed ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.pri_btn {
+  @extend %btn-base;
+  background: $oo;
+  color: $ff;
+
+  &:hover {
+    background: lighten($oo, 20%);
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.sec_btn {
+  @extend %btn-base;
+  border: 1px solid $ee;
+  background: $fb;
+  color: $oo;
+
+  &:hover {
+    background: $ee;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.tir_btn {
+  @extend %btn-base;
+  background: transparent;
+  color: $oo;
+  padding: 6px 12px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus {
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
+
+.follow {
+  @extend %btn-base;
+  background: $oo !important;
+  color: $ff !important;
+  
+  &:hover {
+    background: lighten($oo, 15%) !important;
+  }
+}
+
+.unfollow {
+  @extend %btn-base;
+  background: transparent !important;
+  color: $oo !important;
+  border: 1px solid $ee !important;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: $oo !important;
+  }
+}
