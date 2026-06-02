@@ -166,7 +166,7 @@ MYSQL_HOST="localhost"
 MYSQL_PORT="3306"
 MYSQL_USER="root"
 MYSQL_PASSWORD="password-mysql-cua-ban"
-MYSQL_DATABASE="insta"
+MYSQL_DATABASE="vsocial"
 
 # ================================
 # EMAIL CONFIGURATION (Nodemailer)
@@ -223,7 +223,7 @@ node setup-db.js
 
 Script này sẽ tự động:
 - ✅ Kết nối MySQL bằng thông tin trong `.env`
-- ✅ Tạo database `insta` (nếu chưa có)
+- ✅ Tạo database `vsocial` (nếu chưa có)
 - ✅ Import toàn bộ schema từ `db.sql`
 - ✅ Chạy các migration cần thiết (thêm cột, bảng mới...)
 - ✅ Bỏ qua các bước đã thực hiện trước đó (idempotent)
@@ -232,10 +232,10 @@ Script này sẽ tự động:
 ```
 ========================================
 🔌 Connected to MySQL at localhost:3306
-🏗️  Creating database: insta...
+🏗️  Creating database: vsocial...
 ========================================
 
-✅ Database created/exists. Switching to database insta...
+✅ Database created/exists. Switching to database vsocial...
 📄 Reading db.sql...
 ⚡ Executing base db.sql...
 ✅ Base db.sql executed successfully.
@@ -249,7 +249,7 @@ Now running migrations...
 ### 5.3 Kiểm tra database (tuỳ chọn)
 
 ```bash
-mysql -u root -p -e "USE insta; SHOW TABLES;"
+mysql -u root -p -e "USE vsocial; SHOW TABLES;"
 ```
 
 Bạn sẽ thấy danh sách các bảng như: `users`, `posts`, `comments`, `notifications`, `friend_requests`, v.v.
@@ -397,7 +397,7 @@ vsocial/
 | `MYSQL_PORT` | ✅ | Port MySQL | `"3306"` |
 | `MYSQL_USER` | ✅ | Tên người dùng MySQL | `"root"` |
 | `MYSQL_PASSWORD` | ✅ | Mật khẩu MySQL | `"yourpassword"` |
-| `MYSQL_DATABASE` | ✅ | Tên database | `"insta"` |
+| `MYSQL_DATABASE` | ✅ | Tên database | `"vsocial"` |
 | `MAIL` | ⚠️ | Gmail dùng để gửi email | `"app@gmail.com"` |
 | `MAIL_PASSWORD` | ⚠️ | Gmail App Password | `"xxxx xxxx xxxx xxxx"` |
 | `GOOGLE_GEOLOCATION_KEY` | ❌ | Google Maps API key | `"AIza..."` |
