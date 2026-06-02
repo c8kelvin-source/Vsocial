@@ -34,9 +34,6 @@ const HeaderOptions = ({ toggleOptions, lang }) => {
         <li className="o_li">
           <a href="/about">{t(lang, 'header', 'about')}</a>
         </li>
-        <li className="o_li">
-          <a href="/developer">{t(lang, 'header', 'developer')}</a>
-        </li>
         <li className="o_li o_divider">
           <hr className="menu_divider" />
         </li>
