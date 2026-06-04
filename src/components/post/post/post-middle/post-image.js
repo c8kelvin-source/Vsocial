@@ -3,11 +3,14 @@ import ToTags from '../../../hashtag/toTags/toTags'
 import ImageTheatre from '../../../others/imageTheatre/imageTheatre'
 import PropTypes from 'prop-types'
 import PostTags from './post-tags'
+import PostCarousel from './post-carousel'
 import classNames from 'classnames'
 
 export default class PostImage extends Component {
   state = {
     showImage: false,
+    theatreIdx: 0,
+    unblurNSFW: false,
   }
 
   _toggle = what => this.setState({ [what]: !this.state[what] })
@@ -23,11 +26,18 @@ export default class PostImage extends Component {
         username,
         tags_count,
         isNSFW,
+        mediaFiles,
       },
     } = this.props
-    let { showImage, unblurNSFW } = this.state
+    let { showImage, theatreIdx, unblurNSFW } = this.state
 
-    let shouldBlur = isNSFW && !unblurNSFW
+    // Resolve media list: prefer mediaFiles array, fall back to single imgSrc
+    const media = Array.isArray(mediaFiles) && mediaFiles.length > 0
+      ? mediaFiles
+      : (imgSrc ? [{ filename: imgSrc, filter: filter || 'filter-normal', sort_order: 0 }] : [])
+
+    const isMulti = media.length > 1
+    const shouldBlur = isNSFW && !unblurNSFW
 
     return (
       <div>
@@ -42,41 +52,62 @@ export default class PostImage extends Component {
               </p>
             </div>
 
-            {imgSrc ? (
-              <div style={{ position: 'relative' }}>
-                {imgSrc.match(/\.(mp4|webm|mov|ogg|mkv)$/i) ? (
-                  <video
-                    src={`/posts/${imgSrc}`}
-                    className={classNames('p_img', filter)}
-                    controls={!shouldBlur}
-                    controlsList="nodownload"
-                    style={{ filter: shouldBlur ? 'blur(20px)' : 'none', pointerEvents: shouldBlur ? 'none' : 'auto' }}
-                  />
-                ) : (
-                  <img
-                    src={`/posts/${imgSrc}`}
-                    className={classNames('p_img', filter)}
-                    onClick={() => { if (!shouldBlur) this._toggle('showImage') }}
-                    style={{ filter: shouldBlur ? 'blur(20px)' : 'none', cursor: shouldBlur ? 'default' : 'pointer' }}
-                  />
-                )}
-                {shouldBlur && (
-                  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.3)', color: 'white' }}>
-                    <span style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Sensitive Content</span>
-                    <button className="sec_btn" onClick={() => this._toggle('unblurNSFW')} style={{ padding: '8px 15px' }}>Click to view</button>
+            {/* Multi-file carousel */}
+            {isMulti ? (
+              <PostCarousel
+                mediaFiles={media}
+                isNSFW={isNSFW}
+                onImageClick={idx => this.setState({ showImage: true, theatreIdx: idx })}
+              />
+            ) : media.length === 1 ? (
+              /* Single file — original behaviour */
+              (() => {
+                const item = media[0]
+                const filterStr = item.filter || 'filter-normal'
+                const parts = filterStr.split(' ')
+                const filterClass = parts[0] || 'filter-normal'
+                const contrastPart = parts.find(p => p.startsWith('contrast-'))
+                const contrastVal = contrastPart ? contrastPart.replace('contrast-', '') : '100'
+                const finalFilter = shouldBlur ? `contrast(${contrastVal}%) blur(20px)` : `contrast(${contrastVal}%)`
+
+                return (
+                  <div style={{ position: 'relative' }} className={filterClass}>
+                    {item.filename.match(/\.(mp4|webm|mov|ogg|mkv)$/i) ? (
+                      <video
+                        src={`/posts/${item.filename}`}
+                        className="p_img"
+                        controls={!shouldBlur}
+                        controlsList="nodownload"
+                        style={{ filter: finalFilter, pointerEvents: shouldBlur ? 'none' : 'auto' }}
+                      />
+                    ) : (
+                      <img
+                        src={`/posts/${item.filename}`}
+                        className="p_img"
+                        onClick={() => { if (!shouldBlur) this.setState({ showImage: true, theatreIdx: 0 }) }}
+                        style={{ filter: finalFilter, cursor: shouldBlur ? 'default' : 'pointer' }}
+                        alt="Post"
+                      />
+                    )}
+                    {shouldBlur && (
+                      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.3)', color: 'white', zIndex: 2 }}>
+                        <span style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Sensitive Content</span>
+                        <button className="sec_btn" onClick={() => this._toggle('unblurNSFW')} style={{ padding: '8px 15px' }}>Click to view</button>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                )
+              })()
             ) : null}
 
             <PostTags post_id={post_id} tags_count={tags_count} />
           </div>
         </div>
 
-        {showImage && (
+        {showImage && media[theatreIdx] && !media[theatreIdx].filename.match(/\.(mp4|webm|mov|ogg|mkv)$/i) && (
           <ImageTheatre
-            imgSrc={`/posts/${imgSrc}`}
-            filter={filter}
+            imgSrc={`/posts/${media[theatreIdx].filename}`}
+            filter={media[theatreIdx].filter}
             username={username}
             time={post_time}
             link={`/post/${post_id}`}
@@ -97,5 +128,7 @@ PostImage.propTypes = {
     filter: PropTypes.string.isRequired,
     tags_count: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired,
+    isNSFW: PropTypes.bool,
+    mediaFiles: PropTypes.array,
   }).isRequired,
 }

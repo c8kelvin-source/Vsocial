@@ -24,11 +24,15 @@ Array [
       }
     >
       <div
-        className="img_s_img"
+        className="img_s_img ashly"
       >
         <img
-          className="ashly"
           src="/images/elephant-march.png"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
       </div>
       <div

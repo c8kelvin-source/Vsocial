@@ -119,6 +119,7 @@ Array [
             </p>
           </div>
           <div
+            className="filter-ashby"
             style={
               Object {
                 "position": "relative",
@@ -126,13 +127,14 @@ Array [
             }
           >
             <img
-              className="p_img filter-ashby"
+              alt="Post"
+              className="p_img"
               onClick={[Function]}
               src="/posts/instagram_1518972814710.jpg"
               style={
                 Object {
                   "cursor": "pointer",
-                  "filter": "none",
+                  "filter": "contrast(100%)",
                 }
               }
             />

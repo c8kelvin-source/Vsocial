@@ -22,6 +22,9 @@ const initialState = {
   Hashtag,
   Setting,
   Message,
+  Language: {
+    language: 'en'
+  }
 }
 
 const middlewares = [thunk]

@@ -7,7 +7,7 @@ const app = require('express').Router(),
     dest: `${root}/dist/temp/`,
   }),
   { ProcessImage, DeleteAllOfFolder } = require('../../../config/ImageProcessor'),
-  { createReadStream, createWriteStream, unlink } = require('fs'),
+  { createReadStream, createWriteStream, unlink, renameSync } = require('fs'),
   { promisify } = require('util')
 
 // TEXT MESSAGE [REQ = MESSAGE, CON_ID, CON_WITH]
@@ -52,6 +52,35 @@ app.post('/image-message', upload.single('messageFile'), async (req, res) => {
 
     await ProcessImage(obj)
     DeleteAllOfFolder(`${root}/dist/temp/`)
+
+    let { insertId } = await db.query('INSERT INTO messages SET ?', message)
+
+    res.json({
+      success: true,
+      mssg: 'Messaged!!',
+      message_id: insertId,
+      filename,
+    })
+  } catch (error) {
+    db.catchError(error, res)
+  }
+})
+
+// AUDIO MESSAGE [REQ = CON_ID, CON_WITH, MESSAGEFILE(FILE)]
+app.post('/audio-message', upload.single('messageFile'), async (req, res) => {
+  try {
+    let { con_id, con_with } = req.body,
+      filename = `instagram_message_${new Date().getTime()}.webm`,
+      message = {
+        con_id,
+        mssg_by: req.session.id,
+        mssg_to: con_with,
+        message: filename,
+        type: 'audio',
+        message_time: new Date().getTime(),
+      }
+
+    renameSync(req.file.path, `${root}/dist/messages/${filename}`)
 
     let { insertId } = await db.query('INSERT INTO messages SET ?', message)
 
@@ -122,7 +151,7 @@ app.post('/delete-message', async (req, res) => {
 
     await db.query('DELETE FROM messages WHERE message_id=?', [message_id])
 
-    if (type == 'image' || type == 'sticker') {
+    if (type == 'image' || type == 'sticker' || type == 'audio') {
       deleteMessageFile(`${root}/dist/messages/${message}`)
     }
 

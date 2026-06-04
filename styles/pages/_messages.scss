@@ -318,13 +318,16 @@
             width: 100%;
 
             & .m_m {
-              padding: 10px 14px;
               display: inline-block;
               font-size: 14.5px;
-              border-radius: 18px;
               position: relative;
               max-width: 70%;
               line-height: 1.4;
+
+              &.m_m_bubble {
+                padding: 10px 14px;
+                border-radius: 18px;
+              }
 
               & .m_m_img{
                 width: 220px;
@@ -334,6 +337,92 @@
 
               & .m_m_sticker {
                 width: 80px;
+              }
+
+              & .m_m_audio {
+                max-width: 240px;
+                display: block;
+                margin-top: 5px;
+              }
+
+              & .custom_audio_player {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                border-radius: 24px;
+                padding: 8px 16px;
+                width: 260px;
+                max-width: 100%;
+                box-sizing: border-box;
+                margin-top: 5px;
+                background: rgba(255, 255, 255, 0.1);
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+                & .play_pause_btn {
+                  border: none;
+                  outline: none;
+                  border-radius: 50%;
+                  width: 32px;
+                  height: 32px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+                  flex-shrink: 0;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+                  &:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+                  }
+
+                  & i {
+                    font-size: 20px;
+                    line-height: 1;
+                  }
+                }
+
+                & .audio_progress_container {
+                  flex: 1;
+                  display: flex;
+                  align-items: center;
+                }
+
+                & .audio_seek_bar {
+                  width: 100%;
+                  -webkit-appearance: none;
+                  appearance: none;
+                  height: 4px;
+                  border-radius: 2px;
+                  outline: none;
+                  cursor: pointer;
+                  background: rgba(255, 255, 255, 0.2);
+                  transition: background 0.1s;
+
+                  &::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    transition: transform 0.1s, background-color 0.1s;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+                  }
+
+                  &::-webkit-slider-thumb:hover {
+                    transform: scale(1.2);
+                  }
+                }
+
+                & .audio_time_label {
+                  font-size: 11.5px;
+                  font-weight: 600;
+                  white-space: nowrap;
+                  opacity: 0.85;
+                  font-family: monospace;
+                }
               }
 
             }
@@ -370,14 +459,42 @@
           & .my_mm_div {
             align-items: flex-end;
 
-            & .m_m {
-              background: $oo;
-              color: #fff;
-              border-bottom-right-radius: 4px;
+            & .toggle_mssg_tools {
+              align-self: flex-end;
+              display: flex;
+              justify-content: flex-end;
+              width: 100%;
+            }
 
-              & .hashtag {
+            & .m_m {
+              &.m_m_bubble {
+                background: $oo;
                 color: #fff;
-                text-decoration: underline;
+                border-bottom-right-radius: 4px;
+
+                & .hashtag {
+                  color: #fff;
+                  text-decoration: underline;
+                }
+              }
+
+              & .custom_audio_player {
+                background: $oo;
+                color: #fff;
+                border-bottom-right-radius: 4px;
+
+                & .play_pause_btn {
+                  background: #fff;
+                  color: $oo;
+                  &:hover {
+                    background: #f5f5f5;
+                  }
+                }
+                & .audio_seek_bar {
+                  &::-webkit-slider-thumb {
+                    background: #fff;
+                  }
+                }
               }
             }
             
@@ -393,10 +510,38 @@
           & .not_my_mm_div {
             align-items: flex-start;
 
+            & .toggle_mssg_tools {
+              align-self: flex-start;
+              display: flex;
+              justify-content: flex-start;
+              width: 100%;
+            }
+
             & .m_m {
-              background: $ee;
-              color: $dark;
-              border-bottom-left-radius: 4px;
+              &.m_m_bubble {
+                background: $ee;
+                color: $dark;
+                border-bottom-left-radius: 4px;
+              }
+
+              & .custom_audio_player {
+                background: $ee;
+                color: #fff;
+                border-bottom-left-radius: 4px;
+
+                & .play_pause_btn {
+                  background: $oo;
+                  color: #fff;
+                  &:hover {
+                    opacity: 0.9;
+                  }
+                }
+                & .audio_seek_bar {
+                  &::-webkit-slider-thumb {
+                    background: $oo;
+                  }
+                }
+              }
             }
 
             & .m_m_time {
@@ -435,7 +580,7 @@
 
         & textarea {
           flex: 1;
-          padding: 10px 40px 10px 15px; /* right padding for emoji icon */
+          padding: 10px 120px 10px 45px; /* left: emoji, right: mic, img, sticker */
           height: 44px;
           min-height: 44px;
           max-height: 120px;
@@ -454,47 +599,119 @@
           }
         }
 
-        & input[type='submit'] {
-          padding: 0 20px;
-          height: 44px;
-          font-size: 14px;
-          font-weight: 600;
-          border-radius: 22px;
-          background: $oo;
-          color: white;
+        & input.mssg_send[type='submit'] {
+          position: absolute;
+          right: 15px;
+          bottom: 11px;
+          padding: 0;
+          height: 22px;
+          background: none;
+          color: $oo;
+          font-weight: 700;
+          font-size: 14.5px;
           border: none;
           cursor: pointer;
           transition: opacity 0.2s;
 
           &:hover {
-            opacity: 0.9;
+            opacity: 0.8;
           }
           
           &:disabled {
-            background: $ee;
-            color: $d_light;
-            cursor: not-allowed;
+            display: none;
           }
         }
 
-        & .mssg_emoji_btn {
+        & .mssg_input_actions {
           position: absolute;
-          color: $d_light;
+          right: 15px;
+          bottom: 11px;
           display: flex;
           align-items: center;
-          justify-content: center;
-          right: 90px; /* Space from the right, before the submit button */
-          bottom: 11px; /* Vertically center within the 44px high box */
+          gap: 12px;
           height: 22px;
-          cursor: pointer;
 
-          &:hover {
+          & .mssg_emoji_btn,
+          & .mssg_action_btn,
+          & .mssg_send_btn {
+            position: static;
             color: $d_light;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 22px;
+            cursor: pointer;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            padding: 0;
+            outline: none;
+
+            &:hover {
+              color: $oo;
+            }
+
+            & i {
+              font-size: 20px;
+            }
+          }
+        }
+
+        & .mssg_recording_container {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 44px;
+          background: $fb;
+          border-radius: 22px;
+          border: 1px solid $ee;
+          padding: 0 15px;
+          box-sizing: border-box;
+          gap: 15px;
+
+          & .mssg_recording_dot {
+            width: 10px;
+            height: 10px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            animation: blink 1s infinite;
           }
 
-          & i {
-            font-size: 20px;
+          & .mssg_recording_timer {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: $dark;
+            flex: 1;
           }
+
+          & button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            color: $d_light;
+            transition: color 0.2s;
+
+            &:hover {
+              color: $oo;
+            }
+            
+            &.mssg_recording_cancel:hover {
+              color: #e74c3c;
+            }
+            
+            & i {
+              font-size: 20px;
+            }
+          }
+        }
+
+        @keyframes blink {
+          0%, 100% { opacity: 0.2; }
+          50% { opacity: 1; }
         }
 
       }

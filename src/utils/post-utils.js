@@ -33,20 +33,39 @@ export const addPost = async options => {
       group_name,
       tags,
       isNSFW,
+      mediaFiles,
     } = options,
     user = Number(uData('session')),
     username = uData('username'),
     form = new FormData(),
-    file = targetFile ? (targetFile.type.startsWith('video/') ? targetFile : await imageCompressor(targetFile)) : null,
     action = new Action('.p_post')
 
   action.start()
   wait()
 
-  form.append('desc', desc)
-  if (file) {
-    form.append('image', file)
+  // Multi-file upload path
+  const files = mediaFiles && mediaFiles.length > 0 ? mediaFiles : null
+
+  if (files) {
+    // Process and append each file; videos skip compression
+    const filters = []
+    for (let i = 0; i < files.length; i++) {
+      const entry = files[i]
+      const processed = entry.file.type.startsWith('video/')
+        ? entry.file
+        : await imageCompressor(entry.file)
+      form.append('images', processed)
+      filters.push(entry.filter || 'filter-normal')
+    }
+    form.append('filtersJson', JSON.stringify(filters))
+  } else if (targetFile) {
+    // Single-file legacy path
+    const file = targetFile.type.startsWith('video/') ? targetFile : await imageCompressor(targetFile)
+    form.append('images', file)
+    form.append('filtersJson', JSON.stringify([filter || 'filter-normal']))
   }
+
+  form.append('desc', desc)
   form.append('filter', filter)
   form.append('location', location)
   form.append('type', type)

@@ -340,7 +340,7 @@ CREATE TABLE `messages` (
   `mssg_by` int(11) NOT NULL,
   `mssg_to` int(11) NOT NULL,
   `message` longtext COLLATE utf8mb4_bin NOT NULL,
-  `type` enum('text','image','sticker') COLLATE utf8mb4_bin NOT NULL,
+  `type` enum('text','image','sticker','audio') COLLATE utf8mb4_bin NOT NULL,
   `status` enum('read','unread') COLLATE utf8mb4_bin NOT NULL DEFAULT 'unread',
   `message_time` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

@@ -23,19 +23,18 @@ const checkNSFW = (text) => {
   return { isNSFW: flaggedWords.length > 0, flaggedWords }
 }
 
-// POST [REQ = DESC, FILTER, LOCATION, TYPE, GROUP, IMAGE(FILE) ]
-app.post('/post-it', upload.single('image'), async (req, res) => {
+// POST [REQ = DESC, FILTER, LOCATION, TYPE, GROUP, IMAGES(FILES) ]
+app.post('/post-it', upload.array('images', 10), async (req, res) => {
   try {
     let { id } = req.session,
-      { desc, filter, location, type, group, isNSFW: isNSFWStr } = req.body,
+      { desc, filter, location, type, group, isNSFW: isNSFWStr, filtersJson } = req.body,
       isNSFWClient = isNSFWStr === 'true',
       groupId = group === 'undefined' || !group ? 0 : parseInt(group, 10),
-      ext = req.file ? require('path').extname(req.file.originalname).toLowerCase() : '',
-      filename = req.file ? `instagram_${new Date().getTime()}${ext || '.jpg'}` : '',
-      obj = req.file ? {
-        srcFile: req.file.path,
-        destFile: `${root}/dist/posts/${filename}`,
-      } : null
+      path = require('path'),
+      files = req.files || [],
+      filtersArr = (() => {
+        try { return JSON.parse(filtersJson || '[]') } catch (e) { return [] }
+      })()
 
     // Check for NSFW content
     const nsfwResult = checkNSFW(desc)
@@ -46,28 +45,60 @@ app.post('/post-it', upload.single('image'), async (req, res) => {
       desc = desc ? `${desc} #nsfw` : '#nsfw'
     }
 
-    let insert = {
-        user: id,
-        description: desc,
-        imgSrc: filename,
-        filter,
-        location,
-        type,
-        group_id: groupId,
-        post_time: new Date().getTime(),
-        status: postStatus,
-        rejection_reason: rejectionReason,
-        isNSFW: finalIsNSFW ? 1 : 0,
-        nsfwTaggedByAuthor: isNSFWClient ? 1 : 0,
-      }
+    // Process each uploaded file and collect filenames
+    const processedFilenames = []
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      const ext = path.extname(file.originalname).toLowerCase()
+      const filename = `instagram_${new Date().getTime()}_${i}${ext || '.jpg'}`
+      const isVideo = file.mimetype && file.mimetype.startsWith('video/')
 
-    if (obj) {
-      await ProcessImage(obj)
-      DeleteAllOfFolder(`${root}/dist/temp/`)
+      if (isVideo) {
+        // Copy video directly without jimp processing
+        require('fs').copyFileSync(file.path, `${root}/dist/posts/${filename}`)
+      } else {
+        await ProcessImage({
+          srcFile: file.path,
+          destFile: `${root}/dist/posts/${filename}`,
+        })
+      }
+      processedFilenames.push(filename)
     }
 
-    let { insertId } = await db.query('INSERT INTO posts SET ?', insert),
-      firstname = await User.getWhat('firstname', id),
+    DeleteAllOfFolder(`${root}/dist/temp/`)
+
+    // Primary image = first file (for backward compat)
+    const primaryImg = processedFilenames.length > 0 ? processedFilenames[0] : ''
+    const primaryFilter = filtersArr[0] || filter || 'filter-normal'
+
+    let insert = {
+      user: id,
+      description: desc,
+      imgSrc: primaryImg,
+      filter: primaryFilter,
+      location,
+      type,
+      group_id: groupId,
+      post_time: new Date().getTime(),
+      status: postStatus,
+      rejection_reason: rejectionReason,
+      isNSFW: finalIsNSFW ? 1 : 0,
+      nsfwTaggedByAuthor: isNSFWClient ? 1 : 0,
+    }
+
+    let { insertId } = await db.query('INSERT INTO posts SET ?', insert)
+
+    // Insert all media into post_media table
+    for (let i = 0; i < processedFilenames.length; i++) {
+      await db.query('INSERT INTO post_media SET ?', {
+        post_id: insertId,
+        filename: processedFilenames[i],
+        filter: filtersArr[i] || 'filter-normal',
+        sort_order: i,
+      })
+    }
+
+    let firstname = await User.getWhat('firstname', id),
       surname = await User.getWhat('surname', id)
 
     await db.toHashtag(desc, id, insertId)
@@ -83,7 +114,7 @@ app.post('/post-it', upload.single('image'), async (req, res) => {
       post_id: insertId,
       firstname,
       surname,
-      filename,
+      filename: primaryImg,
       status: postStatus,
       nsfw_flagged: nsfwResult.isNSFW,
     })

@@ -77,7 +77,10 @@ db.connect(err => {
           "ALTER TABLE `notifications` MODIFY `type` ENUM('follow','tag','like','share','shared_your_post','comment','favourites','recommend','add_grp_member','invite','change_admin','new_con','mention_post','mention_comment','friend_request','friend_accept','post_approved','post_rejected') NOT NULL",
 
           // Friend requests table creation
-          "CREATE TABLE IF NOT EXISTS `friend_requests` (`request_id` int(11) NOT NULL AUTO_INCREMENT, `from_user` int(11) NOT NULL, `to_user` int(11) NOT NULL, `status` ENUM('pending','accepted','rejected') COLLATE utf8mb4_bin NOT NULL DEFAULT 'pending', `request_time` varchar(100) COLLATE utf8mb4_bin NOT NULL, `response_time` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '', PRIMARY KEY (`request_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin"
+          "CREATE TABLE IF NOT EXISTS `friend_requests` (`request_id` int(11) NOT NULL AUTO_INCREMENT, `from_user` int(11) NOT NULL, `to_user` int(11) NOT NULL, `status` ENUM('pending','accepted','rejected') COLLATE utf8mb4_bin NOT NULL DEFAULT 'pending', `request_time` varchar(100) COLLATE utf8mb4_bin NOT NULL, `response_time` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '', PRIMARY KEY (`request_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",
+
+          // Message schema modifications for audio type
+          "ALTER TABLE `messages` MODIFY `type` ENUM('text','image','sticker','audio') COLLATE utf8mb4_bin NOT NULL"
         ];
 
         let completed = 0;

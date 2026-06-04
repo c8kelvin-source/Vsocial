@@ -181,6 +181,46 @@ export const imageMessage = async options => {
 }
 
 /**
+ * Audio message
+ * @param {Object} options
+ * @param {Blob} options.file
+ * @param {Number} options.con_id
+ * @param {Number} options.con_with
+ * @param {Function} options.dispatch
+ */
+export const audioMessage = async options => {
+  let { file: messageFile, con_id, con_with, dispatch } = options,
+    form = new FormData(),
+    o = new d('.overlay-2')
+
+  o.show()
+  wait()
+
+  form.append('messageFile', messageFile)
+  form.append('con_id', con_id)
+  form.append('con_with', con_with)
+
+  let {
+    data: { success, mssg, message_id, filename },
+  } = await post('/api/audio-message', form)
+
+  if (success) {
+    messageDispatchHelper({
+      con_id,
+      con_with,
+      message_id,
+      message: filename,
+      messageType: 'audio',
+      dispatch,
+    })
+  }
+
+  messageScroll()
+  o.hide()
+  Notify({ value: mssg })
+}
+
+/**
  * Sticker message
  * @param {Object} options
  * @param {Number} options.con_id

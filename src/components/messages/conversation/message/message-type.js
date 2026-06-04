@@ -3,6 +3,8 @@ import TimeAgo from 'handy-timeago'
 import ToTags from '../../../hashtag/toTags/toTags'
 import PropTypes from 'prop-types'
 import ImageTheatre from '../../../others/imageTheatre/imageTheatre'
+import AudioPlayer from './audio-player'
+import classNames from 'classnames'
 
 export default class MessageType extends Component {
   state = {
@@ -14,10 +16,11 @@ export default class MessageType extends Component {
   render() {
     let { type, message, message_time } = this.props.messageDetails
     let { showImage } = this.state
+    const isText = type === 'text' || !type
 
     return (
       <Fragment>
-        <div className="m_m" title={TimeAgo(message_time)}>
+        <div className={classNames('m_m', { 'm_m_bubble': isText })} title={TimeAgo(message_time)}>
           {!message ? (
             <span style={{ fontStyle: 'italic' }}>Empty message</span>
           ) : type == 'text' ? (
@@ -30,6 +33,8 @@ export default class MessageType extends Component {
             />
           ) : type == 'sticker' ? (
             <img src={`/messages/${message}`} className="m_m_sticker" />
+          ) : type == 'audio' ? (
+            <AudioPlayer src={`/messages/${message}`} />
           ) : null}
         </div>
 

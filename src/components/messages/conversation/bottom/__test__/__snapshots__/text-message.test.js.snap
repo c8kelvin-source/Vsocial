@@ -5,35 +5,106 @@ exports[`TextMessage Component should match snapshot 1`] = `
   className="add_mssg_form"
   onSubmit={[Function]}
 >
-  <textarea
-    className="send_mssg"
-    onChange={[Function]}
-    placeholder="Send message.."
-    required={true}
-    spellCheck="false"
-    value=""
-  />
-  <span
-    className="mssg_emoji_btn"
-    data-tip="Add emojis"
-    onClick={[Function]}
-  >
-    <i
-      className="material-icons"
-    >
-      sentiment_very_satisfied
-    </i>
-  </span>
   <div
-    className="__react_component_tooltip place-top type-dark "
-    data-id="tooltip"
+    className="mssg_input_wrapper"
+    style={
+      Object {
+        "display": "flex",
+        "position": "relative",
+        "width": "100%",
+      }
+    }
   >
-    
+    <textarea
+      className="send_mssg"
+      onChange={[Function]}
+      placeholder="Send message.."
+      required={true}
+      spellCheck="false"
+      style={
+        Object {
+          "paddingLeft": "15px",
+          "paddingRight": "145px",
+          "width": "100%",
+        }
+      }
+      value=""
+    />
+    <div
+      className="mssg_input_actions"
+    >
+      <span
+        className="mssg_emoji_btn"
+        data-tip="Add emojis"
+        onClick={[Function]}
+      >
+        <i
+          className="material-icons"
+        >
+          sentiment_very_satisfied
+        </i>
+      </span>
+      <div
+        className="__react_component_tooltip place-top type-dark "
+        data-id="tooltip"
+      >
+        
+      </div>
+      <span
+        className="mssg_action_btn mssg_mic_btn"
+        data-tip="Record voice message"
+        onClick={[Function]}
+      >
+        <i
+          className="material-icons"
+        >
+          mic
+        </i>
+      </span>
+      <span
+        className="mssg_action_btn mssg_img_btn"
+        data-tip="Send image"
+      >
+        <input
+          accept="image/*"
+          id="msg_image_upload"
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+        <label
+          htmlFor="msg_image_upload"
+          style={
+            Object {
+              "cursor": "pointer",
+              "display": "flex",
+              "margin": 0,
+            }
+          }
+        >
+          <i
+            className="material-icons"
+          >
+            image
+          </i>
+        </label>
+      </span>
+      <span
+        className="mssg_action_btn mssg_sticker_btn"
+        data-tip="Send sticker"
+        onClick={[Function]}
+      >
+        <i
+          className="material-icons"
+        >
+          insert_emoticon
+        </i>
+      </span>
+    </div>
   </div>
-  <input
-    className="pri_btn mssg_send"
-    type="submit"
-    value="Send"
-  />
 </form>
 `;

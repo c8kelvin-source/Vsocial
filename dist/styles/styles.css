@@ -5284,13 +5284,15 @@ li {
   width: 100%;
 }
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m {
-  padding: 10px 14px;
   display: inline-block;
   font-size: 14.5px;
-  border-radius: 18px;
   position: relative;
   max-width: 70%;
   line-height: 1.4;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m.m_m_bubble {
+  padding: 10px 14px;
+  border-radius: 18px;
 }
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .m_m_img {
   width: 220px;
@@ -5299,6 +5301,82 @@ li {
 }
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .m_m_sticker {
   width: 80px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .m_m_audio {
+  max-width: 240px;
+  display: block;
+  margin-top: 5px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 24px;
+  padding: 8px 16px;
+  width: 260px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .play_pause_btn {
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .play_pause_btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .play_pause_btn i {
+  font-size: 20px;
+  line-height: 1;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .audio_progress_container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .audio_seek_bar {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.1s;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .audio_seek_bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.1s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .audio_seek_bar::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m .custom_audio_player .audio_time_label {
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.85;
+  font-family: monospace;
 }
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .m_m_divs .m_m_time {
   display: block;
@@ -5325,14 +5403,35 @@ li {
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div {
   align-items: flex-end;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m {
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .toggle_mssg_tools {
+  align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m.m_m_bubble {
   background: #bb86fc;
   color: #fff;
   border-bottom-right-radius: 4px;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m .hashtag {
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m.m_m_bubble .hashtag {
   color: #fff;
   text-decoration: underline;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m .custom_audio_player {
+  background: #bb86fc;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m .custom_audio_player .play_pause_btn {
+  background: #fff;
+  color: #bb86fc;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m .custom_audio_player .play_pause_btn:hover {
+  background: #f5f5f5;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m .custom_audio_player .audio_seek_bar::-webkit-slider-thumb {
+  background: #fff;
 }
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .my_mm_div .m_m_time {
   margin-right: 5px;
@@ -5343,10 +5442,31 @@ li {
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div {
   align-items: flex-start;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .m_m {
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .toggle_mssg_tools {
+  align-self: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .m_m.m_m_bubble {
   background: #2c2c2c;
   color: #ffffff;
   border-bottom-left-radius: 4px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .m_m .custom_audio_player {
+  background: #2c2c2c;
+  color: #fff;
+  border-bottom-left-radius: 4px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .m_m .custom_audio_player .play_pause_btn {
+  background: #bb86fc;
+  color: #fff;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .m_m .custom_audio_player .play_pause_btn:hover {
+  opacity: 0.9;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .m_m .custom_audio_player .audio_seek_bar::-webkit-slider-thumb {
+  background: #bb86fc;
 }
 .messages_senapati .mssg_right .mssg_messages .m_m_wrapper .m_m_main .not_my_mm_div .m_m_time {
   margin-left: 5px;
@@ -5375,7 +5495,7 @@ li {
 }
 .messages_senapati .mssg_right .mssg_messages .m_m_bottom textarea {
   flex: 1;
-  padding: 10px 40px 10px 15px; /* right padding for emoji icon */
+  padding: 10px 120px 10px 45px; /* left: emoji, right: mic, img, sticker */
   height: 44px;
   min-height: 44px;
   max-height: 120px;
@@ -5392,42 +5512,107 @@ li {
 .messages_senapati .mssg_right .mssg_messages .m_m_bottom textarea:focus {
   border-color: #bb86fc;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_bottom input[type=submit] {
-  padding: 0 20px;
-  height: 44px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 22px;
-  background: #bb86fc;
-  color: white;
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom input.mssg_send[type=submit] {
+  position: absolute;
+  right: 15px;
+  bottom: 11px;
+  padding: 0;
+  height: 22px;
+  background: none;
+  color: #bb86fc;
+  font-weight: 700;
+  font-size: 14.5px;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_bottom input[type=submit]:hover {
-  opacity: 0.9;
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom input.mssg_send[type=submit]:hover {
+  opacity: 0.8;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_bottom input[type=submit]:disabled {
-  background: #2c2c2c;
-  color: #b3b3b3;
-  cursor: not-allowed;
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom input.mssg_send[type=submit]:disabled {
+  display: none;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_emoji_btn {
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions {
   position: absolute;
+  right: 15px;
+  bottom: 11px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 22px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_emoji_btn, .messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_action_btn, .messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_send_btn {
+  position: static;
   color: #b3b3b3;
   display: flex;
   align-items: center;
   justify-content: center;
-  right: 90px; /* Space from the right, before the submit button */
-  bottom: 11px; /* Vertically center within the 44px high box */
   height: 22px;
   cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_emoji_btn:hover {
-  color: #b3b3b3;
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_emoji_btn:hover, .messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_action_btn:hover, .messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_send_btn:hover {
+  color: #bb86fc;
 }
-.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_emoji_btn i {
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_emoji_btn i, .messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_action_btn i, .messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_input_actions .mssg_send_btn i {
   font-size: 20px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_recording_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  background: #121212;
+  border-radius: 22px;
+  border: 1px solid #2c2c2c;
+  padding: 0 15px;
+  box-sizing: border-box;
+  gap: 15px;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_recording_container .mssg_recording_dot {
+  width: 10px;
+  height: 10px;
+  background-color: #e74c3c;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_recording_container .mssg_recording_timer {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_recording_container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #b3b3b3;
+  transition: color 0.2s;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_recording_container button:hover {
+  color: #bb86fc;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_recording_container button.mssg_recording_cancel:hover {
+  color: #e74c3c;
+}
+.messages_senapati .mssg_right .mssg_messages .m_m_bottom .mssg_recording_container button i {
+  font-size: 20px;
+}
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 .messages_senapati .mssg_right .about_con {
   padding: 15px;

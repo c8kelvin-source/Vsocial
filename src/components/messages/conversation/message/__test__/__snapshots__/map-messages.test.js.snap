@@ -73,7 +73,7 @@ exports[`MapMessages Component should match snapshot 1`] = `
               onClick={[Function]}
             >
               <div
-                className="m_m"
+                className="m_m m_m_bubble"
                 title="a month ago"
               >
                 <span>

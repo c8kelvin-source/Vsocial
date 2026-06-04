@@ -8,6 +8,7 @@ exports[`PostItMiddle Component should match snapshot when fileChanged = false 1
       "display": "flex",
       "flexDirection": "column",
       "height": 296,
+      "minHeight": 296,
     }
   }
 >
@@ -40,19 +41,29 @@ exports[`PostItMiddle Component should match snapshot when fileChanged = false 1
       }
     }
   >
-    <input
-      accept="image/*,video/*"
-      id="file_input"
-      onChange={[Function]}
-      type="file"
-      value=""
-    />
     <label
       className="pri_btn"
-      htmlFor="file_input"
+      htmlFor="postit_file_input"
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
     >
-      Choose an image or video
+      Choose images or videos
     </label>
+    <input
+      accept="image/*,video/*"
+      id="postit_file_input"
+      multiple={true}
+      onChange={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      type="file"
+    />
   </form>
   <div
     style={
@@ -101,6 +112,7 @@ exports[`PostItMiddle Component should match snapshot when fileChanged = false 2
       "display": "flex",
       "flexDirection": "column",
       "height": 296,
+      "minHeight": 296,
     }
   }
 >
@@ -120,27 +132,43 @@ exports[`PostItMiddle Component should match snapshot when fileChanged = false 2
       value=""
     />
   </div>
-  <div
-    className="i_p_img"
+  <form
+    className="post_img_form"
+    encType="multipart/formdata"
+    method="post"
     style={
       Object {
+        "alignItems": "center",
+        "display": "flex",
         "flexGrow": 1,
-        "overflow": "hidden",
+        "justifyContent": "center",
       }
     }
   >
-    <img
-      className="filter-normal"
-      src="/images/location.jpg"
+    <label
+      className="pri_btn"
+      htmlFor="postit_file_input"
       style={
         Object {
-          "height": "100%",
-          "objectFit": "cover",
-          "width": "100%",
+          "cursor": "pointer",
         }
       }
+    >
+      Choose images or videos
+    </label>
+    <input
+      accept="image/*,video/*"
+      id="postit_file_input"
+      multiple={true}
+      onChange={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      type="file"
     />
-  </div>
+  </form>
   <div
     style={
       Object {

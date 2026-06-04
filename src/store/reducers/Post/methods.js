@@ -67,6 +67,20 @@ export const changePostIt = (postIt, pyOptions) => {
     ...postIt,
     [what]: value,
   }
+
+  if (what === 'filter' && Array.isArray(postIt.mediaFiles) && postIt.mediaFiles.length > 0) {
+    const activeIdx = postIt.activeMediaIdx || 0
+    if (postIt.mediaFiles[activeIdx]) {
+      const mediaFiles = postIt.mediaFiles.slice()
+      const existingFilter = mediaFiles[activeIdx].filter || 'filter-normal'
+      const parts = existingFilter.split(' ')
+      const contrastPart = parts.find(p => p.startsWith('contrast-'))
+
+      mediaFiles[activeIdx].filter = contrastPart ? `${value} ${contrastPart}` : value
+      updated.mediaFiles = mediaFiles
+    }
+  }
+
   return updated
 }
 

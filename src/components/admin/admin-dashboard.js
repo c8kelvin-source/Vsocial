@@ -739,11 +739,42 @@ export default class AdminDashboard extends Component {
                         {new Date(parseInt(p.post_time)).toLocaleString()}
                       </span>
                     </div>
-                    {p.imgSrc && (
+                    {p.mediaFiles && p.mediaFiles.length > 0 ? (
+                      <div style={styles.mediaGrid}>
+                        {p.mediaFiles.map((m, idx) => {
+                          const isVideo = m.filename && m.filename.match(/\.(mp4|webm|mov|ogg|mkv)$/i)
+                          const filterStr = m.filter || 'filter-normal'
+                          const parts = filterStr.split(' ')
+                          const filterClass = parts[0] || 'filter-normal'
+                          const contrastPart = parts.find(p => p.startsWith('contrast-'))
+                          const contrastVal = contrastPart ? contrastPart.replace('contrast-', '') : '100'
+                          const finalFilter = `contrast(${contrastVal}%)`
+
+                          return (
+                            <div key={idx} style={styles.mediaGridItem} className={filterClass}>
+                              {isVideo ? (
+                                <video
+                                  src={`/posts/${m.filename}`}
+                                  style={Object.assign({}, styles.postImage, { width: '100%', height: 'auto', maxHeight: '300px', marginBottom: 0, filter: finalFilter })}
+                                  controls
+                                />
+                              ) : (
+                                <img
+                                  src={`/posts/${m.filename}`}
+                                  className="p_img"
+                                  alt={`Post media ${idx + 1}`}
+                                  style={Object.assign({}, styles.postImage, { width: '100%', height: 'auto', maxHeight: '300px', marginBottom: 0, filter: finalFilter })}
+                                />
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    ) : p.imgSrc && (
                       p.imgSrc.match(/\.(mp4|webm|mov|ogg|mkv)$/i) ? (
                         <video
                           src={`/posts/${p.imgSrc}`}
-                          style={{...styles.postImage, width: '100%', maxHeight: '400px'}}
+                          style={Object.assign({}, styles.postImage, { width: '100%', maxHeight: '400px' })}
                           controls
                         />
                       ) : (
@@ -1077,6 +1108,8 @@ const styles = {
   postHeader: { display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' },
   postTime: { color: palette.textFaint, fontSize: '12px' },
   postImage: { maxWidth: '100%', maxHeight: '350px', borderRadius: '8px', marginBottom: '14px', objectFit: 'contain', border: `1px solid ${palette.border}` },
+  mediaGrid: { display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', marginBottom: '14px' },
+  mediaGridItem: { flex: '1 1 calc(33.333% - 8px)', minWidth: '200px', maxWidth: '350px', position: 'relative' },
   postDesc: { color: palette.text, marginBottom: '14px', fontSize: '14px', lineHeight: '1.5' },
   postActions: { display: 'flex', gap: '10px', flexWrap: 'wrap' },
   nsfwWarning: {

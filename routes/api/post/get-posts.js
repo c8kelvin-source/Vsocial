@@ -4,6 +4,29 @@ const app = require('express').Router(),
   Post = require('../../../config/Post'),
   User = require('../../../config/User')
 
+// Helper: fetch ordered media files for a post
+const getMediaFiles = async (post_id) => {
+  try {
+    const rows = await db.query(
+      'SELECT filename, filter, sort_order FROM post_media WHERE post_id = ? ORDER BY sort_order ASC',
+      [post_id]
+    )
+    return rows
+  } catch (e) {
+    return []
+  }
+}
+
+// Helper: enrich a single post object with mediaFiles
+const withMedia = async (p) => {
+  let media = await getMediaFiles(p.post_id)
+  if (!media.length && p.imgSrc) {
+    // Backward compat: wrap legacy single imgSrc
+    media = [{ filename: p.imgSrc, filter: p.filter || 'filter-normal', sort_order: 0 }]
+  }
+  return { ...p, mediaFiles: media }
+}
+
 // GET USER POSTS [REQ = USERNAME]
 // Only shows approved posts (or all posts if viewing own profile)
 app.post('/get-user-posts', async (req, res) => {
@@ -26,13 +49,13 @@ app.post('/get-user-posts', async (req, res) => {
         comments_count,
       } = await Post.getCounts(p.post_id)
 
-      posts.push({
+      posts.push(await withMedia({
         ...p,
         tags_count,
         likes_count,
         shares_count,
         comments_count,
-      })
+      }))
     }
 
     res.json(posts)
@@ -59,14 +82,14 @@ app.post('/get-bookmarked-posts', async (req, res) => {
         } = await Post.getCounts(p.post_id),
         group_name = await Group.getWhatOfGrp('name', p.group_id)
 
-      posts.push({
+      posts.push(await withMedia({
         ...p,
         tags_count,
         likes_count,
         shares_count,
         comments_count,
         group_name,
-      })
+      }))
     }
 
     res.json(posts)
@@ -93,14 +116,14 @@ app.post('/get-tagged-posts', async (req, res) => {
         } = await Post.getCounts(p.post_id),
         group_name = await Group.getWhatOfGrp('name', p.group_id)
 
-      posts.push({
+      posts.push(await withMedia({
         ...p,
         tags_count,
         likes_count,
         shares_count,
         comments_count,
         group_name,
-      })
+      }))
     }
 
     res.json(posts)
@@ -128,7 +151,7 @@ app.post('/get-shared-posts', async (req, res) => {
         } = await Post.getCounts(p.post_id),
         group_name = await Group.getWhatOfGrp('name', p.group_id)
 
-      posts.push({
+      posts.push(await withMedia({
         ...p,
         share_by_username,
         tags_count,
@@ -136,7 +159,7 @@ app.post('/get-shared-posts', async (req, res) => {
         shares_count,
         comments_count,
         group_name,
-      })
+      }))
     }
 
     res.json(posts)
@@ -177,14 +200,14 @@ app.post('/get-feed', async (req, res) => {
         } = await Post.getCounts(p.post_id),
         group_name = await Group.getWhatOfGrp('name', p.group_id)
 
-      posts.push({
+      posts.push(await withMedia({
         ...p,
         tags_count,
         likes_count,
         shares_count,
         comments_count,
         group_name,
-      })
+      }))
     }
 
     res.json(posts)
@@ -227,7 +250,7 @@ app.post('/get-post', async (req, res) => {
         'name',
         _post[0] ? _post[0].group_id : 0
       ),
-      post = {
+      post = await withMedia({
         ..._post[0],
         tags_count,
         likes_count,
@@ -235,7 +258,7 @@ app.post('/get-post', async (req, res) => {
         comments_count,
         group_name,
         comments,
-      }
+      })
 
     res.json(post)
   } catch (error) {

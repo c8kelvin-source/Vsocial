@@ -4,10 +4,26 @@ const app = require('express').Router(),
   User = require('../../../config/User'),
   Post = require('../../../config/Post')
 
+// Helper: enrich a post with its ordered media files
+const withMedia = async (p) => {
+  try {
+    const rows = await db.query(
+      'SELECT filename, filter, sort_order FROM post_media WHERE post_id = ? ORDER BY sort_order ASC',
+      [p.post_id]
+    )
+    const media = rows.length
+      ? rows
+      : (p.imgSrc ? [{ filename: p.imgSrc, filter: p.filter || 'filter-normal', sort_order: 0 }] : [])
+    return { ...p, mediaFiles: media }
+  } catch (e) {
+    return { ...p, mediaFiles: p.imgSrc ? [{ filename: p.imgSrc, filter: p.filter || 'filter-normal', sort_order: 0 }] : [] }
+  }
+}
+
 // GET USER GROUPS [REQ = USER]
 app.post('/get-user-groups', async (req, res) => {
   let _groups = await db.query(
-      'SELECT g.group_id, g.name, g.admin, group_members.member, group_members.joined_group FROM group_members, \`groups\` g WHERE group_members.member = ? AND group_members.group_id = g.group_id ORDER BY g.created DESC',
+      'SELECT g.group_id, g.name, g.admin, group_members.member, group_members.joined_group FROM group_members, `groups` g WHERE group_members.member = ? AND group_members.group_id = g.group_id ORDER BY g.created DESC',
       [req.body.user]
     ),
     groups = []
@@ -36,13 +52,13 @@ app.post('/get-group-posts', async (req, res) => {
       comments_count,
     } = await Post.getCounts(p.post_id)
 
-    posts.push({
+    posts.push(await withMedia({
       ...p,
       tags_count,
       likes_count,
       shares_count,
       comments_count,
-    })
+    }))
   }
     res.json(posts)
   } catch (error) {

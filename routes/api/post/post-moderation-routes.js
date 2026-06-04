@@ -22,6 +22,29 @@ const checkNSFW = (text) => {
   }
 }
 
+// Helper: fetch ordered media files for a post
+const getMediaFiles = async (post_id) => {
+  try {
+    const rows = await db.query(
+      'SELECT filename, filter, sort_order FROM post_media WHERE post_id = ? ORDER BY sort_order ASC',
+      [post_id]
+    )
+    return rows
+  } catch (e) {
+    return []
+  }
+}
+
+// Helper: enrich a single post object with mediaFiles
+const withMedia = async (p) => {
+  let media = await getMediaFiles(p.post_id)
+  if (!media.length && p.imgSrc) {
+    // Backward compat: wrap legacy single imgSrc
+    media = [{ filename: p.imgSrc, filter: p.filter || 'filter-normal', sort_order: 0 }]
+  }
+  return { ...p, mediaFiles: media }
+}
+
 // GET PENDING POSTS (Admin only)
 app.post('/get-pending-posts', mw.AdminOnly, async (req, res) => {
   try {
@@ -34,7 +57,7 @@ app.post('/get-pending-posts', mw.AdminOnly, async (req, res) => {
     for (let p of posts) {
       let { tags_count, likes_count, shares_count, comments_count } = await Post.getCounts(p.post_id)
       const nsfwCheck = checkNSFW(p.description)
-      result.push({
+      result.push(await withMedia({
         ...p,
         tags_count,
         likes_count,
@@ -42,7 +65,7 @@ app.post('/get-pending-posts', mw.AdminOnly, async (req, res) => {
         comments_count,
         nsfw_flagged: nsfwCheck.isNSFW,
         nsfw_words: nsfwCheck.flaggedWords,
-      })
+      }))
     }
 
     res.json(result)
@@ -135,13 +158,13 @@ app.post('/get-all-posts-admin', mw.AdminOnly, async (req, res) => {
     let result = []
     for (let p of posts) {
       let { tags_count, likes_count, shares_count, comments_count } = await Post.getCounts(p.post_id)
-      result.push({
+      result.push(await withMedia({
         ...p,
         tags_count,
         likes_count,
         shares_count,
         comments_count,
-      })
+      }))
     }
 
     res.json(result)

@@ -31,12 +31,17 @@ exports[`Filters Component should match snapshot 1`] = `
       className="add_filters_main"
     >
       <div
-        className="filter_div fp_filter-normal"
+        className="filter_div fp_filter-normal select_receiver_toggle"
         onClick={[Function]}
       >
         <img
           className="filter-normal"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Normal
@@ -49,6 +54,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-1977"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           1977
@@ -61,6 +71,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-aden"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Aden
@@ -73,6 +88,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-amaro"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Amaro
@@ -85,6 +105,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-ashby"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Ashby
@@ -97,6 +122,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-brannan"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Brannan
@@ -109,6 +139,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-brooklyn"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Brooklyn
@@ -121,6 +156,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-charmes"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Charmes
@@ -133,6 +173,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-clarendon"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Clarendon
@@ -145,6 +190,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-crema"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Crema
@@ -157,6 +207,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-dogpatch"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Dogpatch
@@ -169,6 +224,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-earlybird"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Earlybird
@@ -181,6 +241,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-gingham"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Gingham
@@ -193,6 +258,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-ginza"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Ginza
@@ -205,6 +275,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-hefe"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Hefe
@@ -217,6 +292,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-helena"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Helena
@@ -229,6 +309,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-hudson"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Hudson
@@ -241,6 +326,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-inkwell"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Inkwell
@@ -253,6 +343,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-juno"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Juno
@@ -265,6 +360,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-kelvin"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Kelvin
@@ -277,6 +377,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-lark"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Lark
@@ -289,6 +394,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-lofi"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Lofi
@@ -301,6 +411,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-ludwig"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Ludwig
@@ -313,6 +428,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-maven"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Maven
@@ -325,6 +445,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-mayfair"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Mayfair
@@ -337,6 +462,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-moon"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Moon
@@ -349,6 +479,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-nashville"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Nashville
@@ -361,6 +496,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-perpetua"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Perpetua
@@ -373,6 +513,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-poprocket"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Poprocket
@@ -385,6 +530,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-reyes"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Reyes
@@ -397,6 +547,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-rise"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Rise
@@ -409,6 +564,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-sierra"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Sierra
@@ -421,6 +581,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-skyline"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Skyline
@@ -433,6 +598,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-slumber"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Slumber
@@ -445,6 +615,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-stinson"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Stinson
@@ -457,6 +632,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-sutro"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Sutro
@@ -469,6 +649,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-toaster"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Toaster
@@ -481,6 +666,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-valencia"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Valencia
@@ -493,6 +683,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-vesper"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Vesper
@@ -505,6 +700,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-walden"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Walden
@@ -517,6 +717,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-willow"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Willow
@@ -529,6 +734,11 @@ exports[`Filters Component should match snapshot 1`] = `
         <img
           className="filter-xpro-ii"
           src="/images/location.jpg"
+          style={
+            Object {
+              "filter": "contrast(100%)",
+            }
+          }
         />
         <span>
           Xpro-ii

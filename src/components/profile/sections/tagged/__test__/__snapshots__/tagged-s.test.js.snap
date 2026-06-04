@@ -274,6 +274,7 @@ exports[`Tagged Component should match snapshot 1`] = `
                     </p>
                   </div>
                   <div
+                    className="filter-ashby"
                     style={
                       Object {
                         "position": "relative",
@@ -281,13 +282,14 @@ exports[`Tagged Component should match snapshot 1`] = `
                     }
                   >
                     <img
-                      className="p_img filter-ashby"
+                      alt="Post"
+                      className="p_img"
                       onClick={[Function]}
                       src="/posts/instagram_1518972814710.jpg"
                       style={
                         Object {
                           "cursor": "pointer",
-                          "filter": "none",
+                          "filter": "contrast(100%)",
                         }
                       }
                     />
@@ -580,6 +582,7 @@ exports[`Tagged Component should match snapshot 1`] = `
                     </p>
                   </div>
                   <div
+                    className="filter-normal"
                     style={
                       Object {
                         "position": "relative",
@@ -587,13 +590,14 @@ exports[`Tagged Component should match snapshot 1`] = `
                     }
                   >
                     <img
-                      className="p_img filter-normal"
+                      alt="Post"
+                      className="p_img"
                       onClick={[Function]}
                       src="/posts/instagram_1518945386167.jpg"
                       style={
                         Object {
                           "cursor": "pointer",
-                          "filter": "none",
+                          "filter": "contrast(100%)",
                         }
                       }
                     />

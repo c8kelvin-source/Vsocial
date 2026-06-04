@@ -54,5 +54,5 @@ Message.propTypes = {
   mssg_by: PropTypes.number.isRequired,
   mssg_to: PropTypes.number.isRequired,
   status: PropTypes.oneOf(['read', 'unread']).isRequired,
-  type: PropTypes.oneOf(['text', 'image', 'sticker']).isRequired,
+  type: PropTypes.oneOf(['text', 'image', 'sticker', 'audio']).isRequired,
 }

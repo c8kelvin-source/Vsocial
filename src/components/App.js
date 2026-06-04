@@ -5,7 +5,6 @@ import { getUnreadNotifications } from '../actions/notification'
 import { getUnreadMessages } from '../actions/message'
 
 import Header from './others/header/header'
-import NotiSpeak from './others/noti-speak'
 import SideBar from './others/sidebar/sidebar'
 import AppRoutes from './App-routes'
 
@@ -23,7 +22,6 @@ class App extends Component {
       <Router>
         <div className="app">
           <Header />
-          <NotiSpeak un={unreadNotifications} />
           <SideBar un={unreadNotifications} uc={unreadMessages} />
           <AppRoutes />
         </div>

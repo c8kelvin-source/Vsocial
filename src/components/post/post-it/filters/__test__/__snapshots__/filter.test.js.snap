@@ -8,6 +8,11 @@ exports[`Filter Component should match snapshot 1`] = `
   <img
     className="filter-ashby"
     src="/images/location.jpg"
+    style={
+      Object {
+        "filter": "contrast(100%)",
+      }
+    }
   />
   <span>
     Ashby

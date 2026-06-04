@@ -5,6 +5,11 @@ Array [
   <NavLink
     activeClassName="ha_active"
     className="notification"
+    style={
+      Object {
+        "position": "relative",
+      }
+    }
     to="/notifications"
   >
     <span
@@ -15,6 +20,30 @@ Array [
       >
         notifications_none
       </i>
+    </span>
+    <span
+      style={
+        Object {
+          "alignItems": "center",
+          "background": "#f87171",
+          "borderRadius": "50%",
+          "boxSizing": "border-box",
+          "color": "#fff",
+          "display": "flex",
+          "fontSize": 10,
+          "fontWeight": "bold",
+          "height": 16,
+          "justifyContent": "center",
+          "minWidth": 16,
+          "padding": "0 4px",
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": "translate(4px, -4px)",
+        }
+      }
+    >
+      5
     </span>
   </NavLink>,
   <NavLink

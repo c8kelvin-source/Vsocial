@@ -26,10 +26,14 @@ export default class PostIt extends Component {
 
   render() {
     let {
-      postIt: { fileChanged, showOverlay },
+      postIt: { fileChanged, showOverlay, mediaFiles, activeMediaIdx },
       dispatch,
       back,
     } = this.props
+
+    const activeFile = mediaFiles && mediaFiles[activeMediaIdx]
+    const isVideo = activeFile && activeFile.previewUrl && activeFile.previewUrl.startsWith('data:video/')
+    const showFilters = fileChanged && !isVideo
 
     return (
       <div>
@@ -37,7 +41,7 @@ export default class PostIt extends Component {
 
         <div className="post" style={{ left: fileChanged ? '41%' : '50%' }}>
           <FadeIn duration="300ms">
-            {fileChanged && <Filters />}
+            {showFilters && <Filters />}
 
             <PostItHeader />
             <Middle />
