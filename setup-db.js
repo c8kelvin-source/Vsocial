@@ -80,7 +80,13 @@ db.connect(err => {
           "CREATE TABLE IF NOT EXISTS `friend_requests` (`request_id` int(11) NOT NULL AUTO_INCREMENT, `from_user` int(11) NOT NULL, `to_user` int(11) NOT NULL, `status` ENUM('pending','accepted','rejected') COLLATE utf8mb4_bin NOT NULL DEFAULT 'pending', `request_time` varchar(100) COLLATE utf8mb4_bin NOT NULL, `response_time` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '', PRIMARY KEY (`request_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",
 
           // Message schema modifications for audio type
-          "ALTER TABLE `messages` MODIFY `type` ENUM('text','image','sticker','audio') COLLATE utf8mb4_bin NOT NULL"
+          "ALTER TABLE `messages` MODIFY `type` ENUM('text','image','sticker','audio') COLLATE utf8mb4_bin NOT NULL",
+
+          // Post media table creation
+          "CREATE TABLE IF NOT EXISTS `post_media` (`media_id` int(11) NOT NULL AUTO_INCREMENT, `post_id` int(11) NOT NULL, `filename` mediumtext COLLATE utf8mb4_bin NOT NULL, `filter` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT 'filter-normal', `sort_order` int(11) NOT NULL DEFAULT 0, PRIMARY KEY (`media_id`), KEY `post_id` (`post_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",
+
+          // Backfill existing posts into post_media
+          "INSERT INTO `post_media` (`post_id`, `filename`, `filter`, `sort_order`) SELECT `post_id`, `imgSrc`, IFNULL(`filter`, 'filter-normal'), 0 FROM `posts` WHERE `imgSrc` IS NOT NULL AND `imgSrc` != '' AND NOT EXISTS (SELECT 1 FROM `post_media` pm WHERE pm.`post_id` = `posts`.`post_id`)"
         ];
 
         let completed = 0;
