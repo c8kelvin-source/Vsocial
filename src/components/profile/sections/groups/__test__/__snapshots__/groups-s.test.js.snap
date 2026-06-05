@@ -22,62 +22,89 @@ exports[`UserGroups Component should match snapshot 1`] = `
       className="senapati pro_senapati"
     >
       <div
-        className="m_div"
+        className="srajkumar"
+        style={
+          Object {
+            "marginTop": -8,
+          }
+        }
       >
-        <div
-          className="m_header"
-        >
-          <span>
-            1 group
-          </span>
-        </div>
-        <div
-          className="m_wrapper"
-        >
+        <div>
           <div
-            className="m_on followers_m_on"
+            className="recomm_teaser"
           >
-            <div
-              className="m_top"
+            <span>
+              Create public or private group of your interest with people you know.
+            </span>
+            <a
+              className="sec_btn"
+              href="#"
+              onClick={[Function]}
             >
-              <img
-                src="/groups/11/avatar.jpg"
-              />
-              <div
-                className="m_top_right"
-              >
-                <Link
-                  to="/group/11"
-                >
-                  a groupss
-                </Link>
-                <span>
-                  a month ago
-                </span>
-              </div>
-            </div>
-            <div
-              className="m_bottom"
-            >
-              <a
-                className="pri_btn unfollow"
-                href="#"
-                onClick={[Function]}
-              >
-                Leave group
-              </a>
-            </div>
+              Create group
+            </a>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      className="page_end"
-      onClick={[Function]}
-    >
-      <span>
-        Looks like you've reached the end
-      </span>
+      <div
+        className="prajkumar"
+      >
+        <div>
+          <div
+            className="m_header"
+          >
+            <span>
+              1 group
+            </span>
+          </div>
+          <div
+            className="m_wrapper"
+          >
+            <div
+              className="m_on followers_m_on"
+            >
+              <div
+                className="m_top"
+              >
+                <img
+                  src="/groups/11/avatar.jpg"
+                />
+                <div
+                  className="m_top_right"
+                >
+                  <Link
+                    to="/group/11"
+                  >
+                    a groupss
+                  </Link>
+                  <span>
+                    a month ago
+                  </span>
+                </div>
+              </div>
+              <div
+                className="m_bottom"
+              >
+                <a
+                  className="pri_btn unfollow"
+                  href="#"
+                  onClick={[Function]}
+                >
+                  Leave group
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            className="page_end"
+            onClick={[Function]}
+          >
+            <span>
+              Looks like you've reached the end
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

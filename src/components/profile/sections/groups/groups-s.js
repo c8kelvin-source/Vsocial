@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { FadeIn } from 'animate-components'
 import Title from '../../../others/title'
 import { connect } from 'react-redux'
-import { bottomScroll, cLoading } from '../../../../utils/utils'
+import { bottomScroll, cLoading, Me } from '../../../../utils/utils'
 import { getUserGroups } from '../../../../actions/group'
 import UserGroup from './group/group'
 import MonHeader from '../../../others/m-on/mon-header'
 import PropTypes from 'prop-types'
-import NoUserGroups from './no-groups'
+import CreateGroup from '../../../group/create-group/create-group'
+import Nothing from '../../../others/nothing'
+import End from '../../../others/end'
 import IsLoading from '../../../others/isLoading'
 import classNames from 'classnames'
 
@@ -30,9 +32,10 @@ class UserGroups extends Component {
 
   render() {
     let { loading } = this.state,
-      { param: username, groups } = this.props,
+      { param: username, groups, ud } = this.props,
       len = groups.length,
-      map_groups = groups.map(g => <UserGroup key={g.group_id} {...g} />)
+      map_groups = groups.map(g => <UserGroup key={g.group_id} {...g} />),
+      isMe = Me(ud.id)
 
     return (
       <div>
@@ -42,19 +45,36 @@ class UserGroups extends Component {
 
         <FadeIn duration="300ms" className={cLoading(loading)}>
           <div className="senapati pro_senapati">
+            {isMe && (
+              <div className="srajkumar" style={{ marginTop: -8 }}>
+                <CreateGroup />
+              </div>
+            )}
+
             <div
               className={classNames({
-                m_div: len != 0,
-                m_no_div: len == 0,
+                prajkumar: isMe,
+                m_div: !isMe && len != 0,
+                m_no_div: !isMe && len == 0,
               })}
             >
-              <MonHeader len={len} forWhat="group" />
-
-              <div className="m_wrapper">{len != 0 && map_groups}</div>
+              {len == 0 ? (
+                <Nothing
+                  mssg={
+                    isMe
+                      ? "You're not a member of any group!!"
+                      : `${username} is not a member of any group!!`
+                  }
+                />
+              ) : (
+                <div>
+                  <MonHeader len={len} forWhat="group" />
+                  <div className="m_wrapper">{map_groups}</div>
+                  <End />
+                </div>
+              )}
             </div>
           </div>
-
-          <NoUserGroups />
         </FadeIn>
       </div>
     )
