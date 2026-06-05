@@ -124,16 +124,25 @@ app.post('/post-it', upload.array('images', 10), async (req, res) => {
 })
 
 // TAGS USERS FOR A POST [REQ = TAGS, POST_ID]
-app.post('/tag-post', (req, res) => {
-  let { tags, post_id } = req.body
-  tags.forEach(async t => {
-    let tagInsert = {
-      post_id: post_id,
-      user: t.user,
+app.post('/tag-post', async (req, res) => {
+  try {
+    let { tags, post_id } = req.body
+    if (!Array.isArray(tags) || tags.length === 0 || !post_id) {
+      return res.json({ saved: 0 })
     }
-    await db.query('INSERT INTO post_tags SET ?', tagInsert)
-  })
-  res.json(null)
+    let saved = 0
+    for (let t of tags) {
+      if (!t.user) continue
+      await db.query('INSERT IGNORE INTO post_tags SET ?', {
+        post_id: post_id,
+        user: t.user,
+      })
+      saved++
+    }
+    res.json({ saved })
+  } catch (error) {
+    db.catchError(error, res)
+  }
 })
 
 // EDIT POST [REQ = POST, DESCRIPTION]
