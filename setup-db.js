@@ -75,6 +75,9 @@ db.connect(err => {
 
           // Notifications schema modifications
           "ALTER TABLE `notifications` MODIFY `type` ENUM('follow','tag','like','share','shared_your_post','comment','favourites','recommend','add_grp_member','invite','change_admin','new_con','mention_post','mention_comment','friend_request','friend_accept','post_approved','post_rejected') NOT NULL",
+          "ALTER TABLE `notifications` MODIFY COLUMN `group_id` int(11) NOT NULL DEFAULT 0",
+          "ALTER TABLE `notifications` MODIFY COLUMN `post_id` int(11) NOT NULL DEFAULT 0",
+          "ALTER TABLE `notifications` MODIFY COLUMN `user` int(11) NOT NULL DEFAULT 0",
 
           // Friend requests table creation
           "CREATE TABLE IF NOT EXISTS `friend_requests` (`request_id` int(11) NOT NULL AUTO_INCREMENT, `from_user` int(11) NOT NULL, `to_user` int(11) NOT NULL, `status` ENUM('pending','accepted','rejected') COLLATE utf8mb4_bin NOT NULL DEFAULT 'pending', `request_time` varchar(100) COLLATE utf8mb4_bin NOT NULL, `response_time` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '', PRIMARY KEY (`request_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",

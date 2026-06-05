@@ -101,9 +101,19 @@ app.post('/get-bookmarked-posts', async (req, res) => {
 // GET TAGGED POSTS [REQ = USER]
 app.post('/get-tagged-posts', async (req, res) => {
   try {
+    let { user } = req.body
+    let username = await User.getWhat('username', user)
+    let pattern = `(^|[^a-zA-Z0-9_])@${username}([^a-zA-Z0-9_]|$)`
+
     let _posts = await db.query(
-        "SELECT posts.post_id, posts.user, users.username, users.firstname, users.surname, posts.description, posts.imgSrc, posts.filter, posts.location, posts.type, posts.group_id, posts.post_time, posts.isNSFW, posts.nsfwTaggedByAuthor FROM post_tags, posts, users WHERE post_tags.user = ? AND post_tags.post_id = posts.post_id AND posts.user = users.id AND posts.status='approved' ORDER BY posts.post_time DESC",
-        [req.body.user]
+        `SELECT DISTINCT posts.post_id, posts.user, users.username, users.firstname, users.surname, posts.description, posts.imgSrc, posts.filter, posts.location, posts.type, posts.group_id, posts.post_time, posts.isNSFW, posts.nsfwTaggedByAuthor
+         FROM posts
+         JOIN users ON posts.user = users.id
+         LEFT JOIN post_tags ON post_tags.post_id = posts.post_id
+         WHERE (post_tags.user = ? OR posts.description REGEXP ?)
+           AND posts.status = 'approved'
+         ORDER BY posts.post_time DESC`,
+        [user, pattern]
       ),
       posts = []
 

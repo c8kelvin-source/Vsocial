@@ -372,10 +372,10 @@ CREATE TABLE `notifications` (
   `notify_id` int(11) NOT NULL,
   `notify_by` int(11) NOT NULL,
   `notify_to` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL DEFAULT '0',
+  `group_id` int(11) NOT NULL DEFAULT '0',
   `type` enum('follow','tag','like','share','shared_your_post','comment','favourites','recommend','add_grp_member','invite','change_admin','new_con','mention_post','mention_comment','friend_request','friend_accept','post_approved','post_rejected') NOT NULL,
-  `user` int(11) NOT NULL,
+  `user` int(11) NOT NULL DEFAULT '0',
   `notify_time` varchar(100) NOT NULL,
   `status` enum('read','unread') NOT NULL DEFAULT 'unread'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
