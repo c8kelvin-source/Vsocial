@@ -7,6 +7,7 @@ import Favourite from './favourite/favourite'
 import PropTypes from 'prop-types'
 import MonHeader from '../../../others/m-on/mon-header'
 import MonEnd from '../../../others/m-on/mon-end'
+import Nothing from '../../../others/nothing'
 import classNames from 'classnames'
 
 class Favourites extends Component {
@@ -26,27 +27,31 @@ class Favourites extends Component {
         <Title value={`@${username}'s favourites`} />
 
         <FadeIn duration="300ms">
-          <div className="senapati pro_senapati">
-            <div
-              className={classNames({
-                m_div: len != 0,
-                m_no_div: len == 0,
-              })}
-            >
-              <MonHeader len={len} forWhat={'favourite'} />
+          {Me(id) ? (
+            <div className="senapati pro_senapati">
+              <div
+                className={classNames({
+                  m_div: len != 0,
+                  m_no_div: len == 0,
+                })}
+              >
+                <MonHeader len={len} forWhat={'favourite'} />
 
-              <div className="m_wrapper">{len != 0 && map_favs}</div>
+                <div className="m_wrapper">{len != 0 && map_favs}</div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div style={{ marginTop: 85 }}>
+              <Nothing mssg={`${username}'s favourites are private!!`} />
+            </div>
+          )}
 
-          <MonEnd
-            len={len}
-            nothingMssg={
-              Me(id)
-                ? 'You have no favourites!!'
-                : `${username} have no favourites!!`
-            }
-          />
+          {Me(id) && (
+            <MonEnd
+              len={len}
+              nothingMssg={'You have no favourites!!'}
+            />
+          )}
         </FadeIn>
       </div>
     )

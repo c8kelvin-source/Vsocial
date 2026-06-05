@@ -7,6 +7,7 @@ import Recommend from './recommend/recommend'
 import PropTypes from 'prop-types'
 import MonHeader from '../../../others/m-on/mon-header'
 import MonEnd from '../../../others/m-on/mon-end'
+import Nothing from '../../../others/nothing'
 import classNames from 'classnames'
 
 class Recommendations extends Component {
@@ -28,27 +29,31 @@ class Recommendations extends Component {
         <Title value={`@${username}'s recommendations`} />
 
         <FadeIn duration="300ms">
-          <div className="senapati pro_senapati">
-            <div
-              className={classNames({
-                m_div: len != 0,
-                m_no_div: len == 0,
-              })}
-            >
-              <MonHeader len={len} forWhat="recommendation" />
+          {Me(id) ? (
+            <div className="senapati pro_senapati">
+              <div
+                className={classNames({
+                  m_div: len != 0,
+                  m_no_div: len == 0,
+                })}
+              >
+                <MonHeader len={len} forWhat="recommendation" />
 
-              <div className="m_wrapper">{len != 0 && map_recommends}</div>
+                <div className="m_wrapper">{len != 0 && map_recommends}</div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div style={{ marginTop: 85 }}>
+              <Nothing mssg={`${username}'s recommendations are private!!`} />
+            </div>
+          )}
 
-          <MonEnd
-            len={len}
-            nothingMssg={
-              Me(id)
-                ? 'You have no recommendations!!'
-                : `${username} have no recommendations!!`
-            }
-          />
+          {Me(id) && (
+            <MonEnd
+              len={len}
+              nothingMssg={'You have no recommendations!!'}
+            />
+          )}
         </FadeIn>
       </div>
     )

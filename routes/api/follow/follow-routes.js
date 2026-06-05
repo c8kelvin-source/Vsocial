@@ -149,16 +149,16 @@ app.post('/get-user-stats', async (req, res) => {
       'SELECT COUNT(view_id) AS views_count FROM profile_views WHERE view_to=?',
       [id]
     ),
-    // favourites
-    favourites = await db.query(
+    // favourites (private: only returned if requested user matches session user)
+    favourites = id === req.session.id ? await db.query(
       'SELECT favourites.fav_id, favourites.fav_by, favourites.user, users.username, users.firstname, users.surname, favourites.fav_time FROM favourites, users WHERE favourites.fav_by = ? AND favourites.user = users.id ORDER BY favourites.fav_time DESC',
       [id]
-    ),
-    // recommendations
-    _recommendations = await db.query(
+    ) : [],
+    // recommendations (private: only returned if requested user matches session user)
+    _recommendations = id === req.session.id ? await db.query(
       'SELECT recommendations.recommend_id, recommendations.recommend_of, users.username AS recommend_of_username, users.firstname AS recommend_of_firstname, users.surname AS recommend_of_surname, recommendations.recommend_to, recommendations.recommend_by, recommendations.recommend_time FROM recommendations, users WHERE recommendations.recommend_to = ? AND recommendations.recommend_of = users.id ORDER BY recommend_time DESC',
       [id]
-    ),
+    ) : [],
     recommendations = []
 
   for (let r of _recommendations) {

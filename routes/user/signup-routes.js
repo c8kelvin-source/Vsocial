@@ -59,7 +59,7 @@ const sendMailAndcreateDir = async (insertId, username, email, res, token, role)
 app.post('/user/signup', async (req, res) => {
   try {
     let {
-      body: { username, firstname, surname, email, password, admin_password },
+      body: { username, firstname, surname, email, password, admin_password, date_of_birth },
       session,
     } = req
 
@@ -119,6 +119,7 @@ app.post('/user/signup', async (req, res) => {
           role,
           cover_image: '',
           account_status: 'active',
+          date_of_birth: date_of_birth || null,
         }
         let { insertId, affectedRows } = await User.create_user(newUser)
 

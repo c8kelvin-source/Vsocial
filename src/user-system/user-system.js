@@ -42,9 +42,10 @@ new d('form.form_register').on('submit', e => {
     surname = new d('.s_surname').val(),
     email = new d('.s_email').val(),
     password = new d('.s_password').val(),
-    admin_password = new d('.s_admin_password').val()
+    admin_password = new d('.s_admin_password').val(),
+    date_of_birth = new d('#s_date_of_birth').val()
 
-  if (!username || !firstname || !surname || !email || !password) {
+  if (!username || !firstname || !surname || !email || !password || !date_of_birth) {
     Notify({ value: 'Values are missing!!' })
   } else {
     let signupOpt = {
@@ -55,6 +56,7 @@ new d('form.form_register').on('submit', e => {
         email,
         password,
         admin_password,
+        date_of_birth,
       },
       when: 'signup',
       btn: '.s_submit',

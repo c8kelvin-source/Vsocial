@@ -149,4 +149,33 @@ app.post('/related-search', async (req, res) => {
   }
 })
 
+// CHECK NSFW ACCESS BASED ON USER AGE [no body params needed - uses session]
+app.post('/check-nsfw-access', async (req, res) => {
+  try {
+    let { id } = req.session
+    if (!id) return res.json({ allowed: false, reason: 'not_logged_in' })
+
+    let result = await db.query('SELECT date_of_birth FROM users WHERE id=? LIMIT 1', [id])
+    if (!result || result.length === 0) return res.json({ allowed: false, reason: 'user_not_found' })
+
+    let { date_of_birth } = result[0]
+    if (!date_of_birth) return res.json({ allowed: false, reason: 'no_dob' })
+
+    // Calculate age
+    let dob = new Date(date_of_birth)
+    let now = new Date()
+    let age = now.getFullYear() - dob.getFullYear()
+    let m = now.getMonth() - dob.getMonth()
+    if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) age--
+
+    if (age >= 18) {
+      res.json({ allowed: true })
+    } else {
+      res.json({ allowed: false, reason: 'underage' })
+    }
+  } catch (error) {
+    db.catchError(error, res)
+  }
+})
+
 module.exports = app

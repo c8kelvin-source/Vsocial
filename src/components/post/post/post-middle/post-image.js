@@ -5,12 +5,15 @@ import PropTypes from 'prop-types'
 import PostTags from './post-tags'
 import PostCarousel from './post-carousel'
 import classNames from 'classnames'
+import axios from 'axios'
 
 export default class PostImage extends Component {
   state = {
     showImage: false,
     theatreIdx: 0,
     unblurNSFW: false,
+    ageBlocked: false,
+    ageChecking: false,
   }
 
   _toggle = what => this.setState({ [what]: !this.state[what] })
@@ -92,7 +95,32 @@ export default class PostImage extends Component {
                     {shouldBlur && (
                       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.3)', color: 'white', zIndex: 2 }}>
                         <span style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Sensitive Content</span>
-                        <button className="sec_btn" onClick={() => this._toggle('unblurNSFW')} style={{ padding: '8px 15px' }}>Click to view</button>
+                        {this.state.ageBlocked ? (
+                          <span style={{ fontSize: '13px', color: '#ffb3b3', padding: '6px 12px', background: 'rgba(255,0,0,0.25)', borderRadius: '6px', textAlign: 'center', maxWidth: '200px' }}>
+                            🔞 Age-restricted: You must be 18+ to view this content.
+                          </span>
+                        ) : (
+                          <button
+                            className="sec_btn"
+                            disabled={this.state.ageChecking}
+                            onClick={async () => {
+                              this.setState({ ageChecking: true })
+                              try {
+                                const { data } = await axios.post('/api/check-nsfw-access')
+                                if (data.allowed) {
+                                  this.setState({ unblurNSFW: true, ageChecking: false })
+                                } else {
+                                  this.setState({ ageBlocked: true, ageChecking: false })
+                                }
+                              } catch (e) {
+                                this.setState({ ageChecking: false })
+                              }
+                            }}
+                            style={{ padding: '8px 15px' }}
+                          >
+                            {this.state.ageChecking ? 'Checking…' : 'Click to view'}
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>

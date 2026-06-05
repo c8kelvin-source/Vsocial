@@ -958,32 +958,33 @@ CREATE TABLE `users` (
   `lastOnline` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `cover_image` varchar(500) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `account_status` enum('active','locked','deleted') COLLATE utf8mb4_bin NOT NULL DEFAULT 'active',
-  `role` enum('user','admin') COLLATE utf8mb4_bin NOT NULL DEFAULT 'user'
+  `role` enum('user','admin') COLLATE utf8mb4_bin NOT NULL DEFAULT 'user',
+  `date_of_birth` DATE DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `firstname`, `surname`, `nickname`, `email`, `password`, `bio`, `joined`, `email_verified`, `account_type`, `instagram`, `twitter`, `facebook`, `github`, `website`, `phone`, `isOnline`, `lastOnline`, `cover_image`, `account_status`, `role`) VALUES
-(7, 'ghalib', 'Mirza', 'Ghalib', '', 'ghalib@gmail.com', '$2a$10$E3ZgkSwaa6rUopG1CBUm8OoCMKVqzSwv79bfuUrICV0eLOqTlqR/m', '', '1759276800000', 'yes', 'private', '', '', '', '', '', '', 'no', '1772500696734', '', 'active', 'user'),
-(8, 'coldplay', 'cold', 'play', '', 'coldplay@gmail.com', '$2a$10$zVPMDJKlOY00UnSlrLEUfuaeTwXkZ.VD4ixp.q1x2RjX/LbezoqPO', '', '1760476487291', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(10, 'noddy', 'your', 'noddy', '', 'noddy@gmail.com', '$2a$10$/FlxKj904j7TnMo.9gJJTe5cwFakoJc4/w9kba3LeAdP0hTWGCzCG', '', '1761012464182', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(11, 'nobita', 'nobita', 'nobi', '', 'nobita@gmail.com', '$2a$10$nzMI2G054StCufuo4fzkEOWhpwUWKqZwV67jbPqaqqSNDNnF5led2', '', '1761080517627', 'no', 'public', '', '', '', '', '', '', 'no', '1769057613335', '', 'active', 'user'),
-(12, 'pikachu', 'your', 'pikachu', '', 'pikachu@gmail.com', '$2a$10$j/buNE/iwJquKzzyBsOhLe4dEVVXKs56KTet8E4arAjcjsQ87BZt2', '', '1761080650179', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(13, 'iamsrk', 'Shahrukh', 'Khan', '', 'iamsrk@gmail.com', '$2a$10$Xn99377.3Ns8.QoneTP4qeMuERyvNR2Ki86eRjpmHCsj01xvFoFIq', '', '1761081644545', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(14, 'kinkade', 'Thomas', 'Kinkade', '', 'kinkade@gmail.com', '$2a$10$IvK3CBxFh/dnkWZtRMh9k.S2/WIdQbd6adF78Bb16.G.62nrSUgcG', '', '1761081903926', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(15, 'suniyo', 'suniyo', 'honekawa', '', 'suniyo@gmail.com', '$2a$10$60TUnK2JiH8RoloKA/IdB.ZG07o.bc8FpHqu9Euc2kEXc28PslceS', '', '1761082719078', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(16, 'zayn', 'Zayn', 'Malik', '', 'zayn@gmail.com', '$2a$10$ktjq/vo/8nBxlOnixyTpQuN6gyXc5vN4.rslSVRt4eM6vhq7ftaxS', '', '1761083124011', 'no', 'private', '', '', '', '', '', '', 'yes', '1771221529522', '', 'active', 'user'),
-(17, 'nfak', 'Nusratfateh', 'Alikhan', '', 'nfak@gmail.com', '$2a$10$TAzl3pUYIs/HRb8LPhvZdOclk/TSfnmicUVgHEGyUwnUxm7j7Z.Ie', '', '1761083252602', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(18, 'ragnar', 'Ragnar', 'Lothbrok', '', 'ragnar@gmail.com', '$2a$10$M7lx4wF.PUhAjSJVxb7bW.nk2G6zxeCjhXBnKTyFz3JNq8NQbQQ8m', '', '1761083395083', 'no', 'public', '', '', '', '', '', '', 'no', '1770424732484', '', 'active', 'user'),
-(19, 'jonsnow', 'jon_', 'snow', '', 'jonsnow@gmail.com', '$2a$10$9Nb4hFjgg.MKKLLTeXMuWehralT21UCoeWsPq3./VWMkUnu19JpzS', '', '1761085378296', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(20, 'gian', 'Takeshi', 'Gauda', '', 'gian@gmail.com', '$2a$10$K3ijpio/4HIOKJhQ5yq3DOQ4IW5Oee4O5hwogEQtB/FBuNJRvd9T2', '', '1761085586423', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(24, 'takkar', 'iam_', 'takkar', '', 'takkar@gmail.com', '$2a$10$R/iWFCwEDgmOvg7mCB3wreerTC0hRuYyZflDN2Gyr3YV/ppMMNgJu', 'Hello #world', '1762574488631', 'no', 'private', '', '', 'm', '', '', 'gg', 'yes', '1773048581709', '', 'active', 'user'),
-(27, 'taylor_swift', 'taylor', 'swift', '', 'taylor_swift@gmail.com', '$2a$10$rnQRsp0iWCdV8b6AD24mJ.7rL5XQ31ejULlOQMVkBpjxD7RlRxqKK', '', '1762576334866', 'no', 'public', '', '', '', '', '', '', 'no', '1770945321938', '', 'active', 'user'),
-(28, 'selena', 'selena', 'gomez', '', 'selenagomez@gmail.com', '$2a$10$.ifdYlKQdt/acrXtn09NLuENJylSfZIJq2U4tqzZNqeRWaUG0nnQq', '', '1762576460603', 'no', 'public', 'mmmm', '', '', '', '', '', 'no', '1773092554827', '', 'active', 'user'),
-(29, 'steve_jobs', 'steve', 'jobs', '', 'steve_jobs@gmail.com', '$2a$10$B05HNF3/pnK.8fU7kCJHpuaU5LpVxwao9Wmkn3Md2sAPc5GINiU6O', '', '1762576550110', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user'),
-(30, 'doraemon', 'iam_', 'doraemon', '', 'doraemon@gmail.com', '$2a$10$OjZg/mosNPOT297skkotUetzYL7mIEFDVxVPP2lsBAv4F0LSyK18m', '', '1763012711939', 'no', 'public', '', '', '', '', '', '', 'no', '1770359765018', '', 'active', 'user');
+INSERT INTO `users` (`id`, `username`, `firstname`, `surname`, `nickname`, `email`, `password`, `bio`, `joined`, `email_verified`, `account_type`, `instagram`, `twitter`, `facebook`, `github`, `website`, `phone`, `isOnline`, `lastOnline`, `cover_image`, `account_status`, `role`, `date_of_birth`) VALUES
+(7, 'ghalib', 'Mirza', 'Ghalib', '', 'ghalib@gmail.com', '$2a$10$E3ZgkSwaa6rUopG1CBUm8OoCMKVqzSwv79bfuUrICV0eLOqTlqR/m', '', '1759276800000', 'yes', 'private', '', '', '', '', '', '', 'no', '1772500696734', '', 'active', 'user', '1997-12-27'),
+(8, 'coldplay', 'cold', 'play', '', 'coldplay@gmail.com', '$2a$10$zVPMDJKlOY00UnSlrLEUfuaeTwXkZ.VD4ixp.q1x2RjX/LbezoqPO', '', '1760476487291', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1995-03-15'),
+(10, 'noddy', 'your', 'noddy', '', 'noddy@gmail.com', '$2a$10$/FlxKj904j7TnMo.9gJJTe5cwFakoJc4/w9kba3LeAdP0hTWGCzCG', '', '1761012464182', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1998-07-04'),
+(11, 'nobita', 'nobita', 'nobi', '', 'nobita@gmail.com', '$2a$10$nzMI2G054StCufuo4fzkEOWhpwUWKqZwV67jbPqaqqSNDNnF5led2', '', '1761080517627', 'no', 'public', '', '', '', '', '', '', 'no', '1769057613335', '', 'active', 'user', '1994-08-07'),
+(12, 'pikachu', 'your', 'pikachu', '', 'pikachu@gmail.com', '$2a$10$j/buNE/iwJquKzzyBsOhLe4dEVVXKs56KTet8E4arAjcjsQ87BZt2', '', '1761080650179', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1996-04-01'),
+(13, 'iamsrk', 'Shahrukh', 'Khan', '', 'iamsrk@gmail.com', '$2a$10$Xn99377.3Ns8.QoneTP4qeMuERyvNR2Ki86eRjpmHCsj01xvFoFIq', '', '1761081644545', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1965-11-02'),
+(14, 'kinkade', 'Thomas', 'Kinkade', '', 'kinkade@gmail.com', '$2a$10$IvK3CBxFh/dnkWZtRMh9k.S2/WIdQbd6adF78Bb16.G.62nrSUgcG', '', '1761081903926', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1958-01-19'),
+(15, 'suniyo', 'suniyo', 'honekawa', '', 'suniyo@gmail.com', '$2a$10$60TUnK2JiH8RoloKA/IdB.ZG07o.bc8FpHqu9Euc2kEXc28PslceS', '', '1761082719078', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '2000-06-10'),
+(16, 'zayn', 'Zayn', 'Malik', '', 'zayn@gmail.com', '$2a$10$ktjq/vo/8nBxlOnixyTpQuN6gyXc5vN4.rslSVRt4eM6vhq7ftaxS', '', '1761083124011', 'no', 'private', '', '', '', '', '', '', 'yes', '1771221529522', '', 'active', 'user', '1993-01-12'),
+(17, 'nfak', 'Nusratfateh', 'Alikhan', '', 'nfak@gmail.com', '$2a$10$TAzl3pUYIs/HRb8LPhvZdOclk/TSfnmicUVgHEGyUwnUxm7j7Z.Ie', '', '1761083252602', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1948-10-13'),
+(18, 'ragnar', 'Ragnar', 'Lothbrok', '', 'ragnar@gmail.com', '$2a$10$M7lx4wF.PUhAjSJVxb7bW.nk2G6zxeCjhXBnKTyFz3JNq8NQbQQ8m', '', '1761083395083', 'no', 'public', '', '', '', '', '', '', 'no', '1770424732484', '', 'active', 'user', '1980-05-22'),
+(19, 'jonsnow', 'jon_', 'snow', '', 'jonsnow@gmail.com', '$2a$10$9Nb4hFjgg.MKKLLTeXMuWehralT21UCoeWsPq3./VWMkUnu19JpzS', '', '1761085378296', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1990-12-26'),
+(20, 'gian', 'Takeshi', 'Gauda', '', 'gian@gmail.com', '$2a$10$K3ijpio/4HIOKJhQ5yq3DOQ4IW5Oee4O5hwogEQtB/FBuNJRvd9T2', '', '1761085586423', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1992-03-30'),
+(24, 'takkar', 'iam_', 'takkar', '', 'takkar@gmail.com', '$2a$10$R/iWFCwEDgmOvg7mCB3wreerTC0hRuYyZflDN2Gyr3YV/ppMMNgJu', 'Hello #world', '1762574488631', 'no', 'private', '', '', 'm', '', '', 'gg', 'yes', '1773048581709', '', 'active', 'user', '1995-09-18'),
+(27, 'taylor_swift', 'taylor', 'swift', '', 'taylor_swift@gmail.com', '$2a$10$rnQRsp0iWCdV8b6AD24mJ.7rL5XQ31ejULlOQMVkBpjxD7RlRxqKK', '', '1762576334866', 'no', 'public', '', '', '', '', '', '', 'no', '1770945321938', '', 'active', 'user', '1989-12-13'),
+(28, 'selena', 'selena', 'gomez', '', 'selenagomez@gmail.com', '$2a$10$.ifdYlKQdt/acrXtn09NLuENJylSfZIJq2U4tqzZNqeRWaUG0nnQq', '', '1762576460603', 'no', 'public', 'mmmm', '', '', '', '', '', 'no', '1773092554827', '', 'active', 'user', '1992-07-22'),
+(29, 'steve_jobs', 'steve', 'jobs', '', 'steve_jobs@gmail.com', '$2a$10$B05HNF3/pnK.8fU7kCJHpuaU5LpVxwao9Wmkn3Md2sAPc5GINiU6O', '', '1762576550110', 'no', 'public', '', '', '', '', '', '', 'no', '', '', 'active', 'user', '1955-02-24'),
+(30, 'doraemon', 'iam_', 'doraemon', '', 'doraemon@gmail.com', '$2a$10$OjZg/mosNPOT297skkotUetzYL7mIEFDVxVPP2lsBAv4F0LSyK18m', '', '1763012711939', 'no', 'public', '', '', '', '', '', '', 'no', '1770359765018', '', 'active', 'user', '1969-09-03');
 
 --
 -- Indexes for dumped tables

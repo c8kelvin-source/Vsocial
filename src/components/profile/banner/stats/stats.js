@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Me } from '../../../../utils/utils'
 import { connect } from 'react-redux'
 import BannerStat from './stat'
@@ -19,10 +19,11 @@ const BannerStats = props => {
       <BannerStat disabled statType="posts" statValue={posts} />
       <BannerStat statType="followers" statValue={followers} />
       <BannerStat statType="followings" statValue={followings} />
-      {Me(id) ? (
-        <BannerStat statType="recommendations" statValue={recommendations} />
-      ) : (
-        <BannerStat statType="favourites" statValue={favourites} />
+      {Me(id) && (
+        <Fragment>
+          <BannerStat statType="favourites" statValue={favourites} />
+          <BannerStat statType="recommendations" statValue={recommendations} />
+        </Fragment>
       )}
       <BannerStat disabled statType="profile views" statValue={profile_views} />
     </div>

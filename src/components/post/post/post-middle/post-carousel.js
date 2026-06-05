@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import axios from 'axios'
 
 /**
  * PostCarousel — smooth-fading carousel for multi-media posts.
@@ -13,6 +14,8 @@ export default class PostCarousel extends Component {
       activeIdx: 0,
       visible: true,   // drives the opacity fade
       unblurNSFW: false,
+      ageBlocked: false,
+      ageChecking: false,
     }
     this._fadeTimeout = null
   }
@@ -114,14 +117,34 @@ export default class PostCarousel extends Component {
           {shouldBlur && (
             <div style={styles.nsfwOverlay}>
               <span style={styles.nsfwLabel}>Sensitive Content</span>
-              <button
-                type="button"
-                className="sec_btn"
-                onClick={e => { e.preventDefault(); this.setState({ unblurNSFW: true }) }}
-                style={{ padding: '8px 15px', marginTop: 8 }}
-              >
-                Click to view
-              </button>
+              {this.state.ageBlocked ? (
+                <span style={{ fontSize: '13px', color: '#ffb3b3', padding: '6px 12px', background: 'rgba(255,0,0,0.25)', borderRadius: '6px', textAlign: 'center', maxWidth: '200px', marginTop: 8 }}>
+                  🔞 Age-restricted: You must be 18+ to view this content.
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  className="sec_btn"
+                  disabled={this.state.ageChecking}
+                  onClick={async e => {
+                    e.preventDefault()
+                    this.setState({ ageChecking: true })
+                    try {
+                      const { data } = await axios.post('/api/check-nsfw-access')
+                      if (data.allowed) {
+                        this.setState({ unblurNSFW: true, ageChecking: false })
+                      } else {
+                        this.setState({ ageBlocked: true, ageChecking: false })
+                      }
+                    } catch (err) {
+                      this.setState({ ageChecking: false })
+                    }
+                  }}
+                  style={{ padding: '8px 15px', marginTop: 8 }}
+                >
+                  {this.state.ageChecking ? 'Checking…' : 'Click to view'}
+                </button>
+              )}
             </div>
           )}
 
